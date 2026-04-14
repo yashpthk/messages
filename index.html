@@ -63,11 +63,69 @@ button {
 }
 #messagePage { display: none; }
 #message {
+  min-height: 4.8em;
   font-size: 1.8rem;
   line-height: 1.5;
   margin: 24px 0;
   opacity: 0;
   transition: opacity .4s ease;
+}
+#message.specialMessage {
+  color: #5f3b54;
+  font-style: italic;
+  font-size: 1.65rem;
+  letter-spacing: 0.01em;
+}
+.card.specialCard {
+  background: #F68DD5;
+  box-shadow: 0 12px 30px rgba(246,141,213,0.22);
+}
+.card.specialCard #message,
+.card.specialCard .small,
+.card.specialCard .hint,
+.card.specialCard .primaryBtn,
+.card.specialCard .lockBtn,
+.card.specialCard .refreshBtn {
+  color: #5f3b54;
+  border-color: rgba(95,59,84,0.25);
+}
+.card.specialCard .primaryBtn,
+.card.specialCard .lockBtn,
+.card.specialCard .refreshBtn {
+  color: #6b5612;
+  border-color: rgba(107, 86, 18, 0.28);
+  background: rgba(255, 245, 196, 0.55);
+}
+.card.specialCard .actionBtn {
+  background: #f2cf63;
+  color: #5b4710;
+  border: none;
+}
+.card.specialCard .primaryBtn:hover,
+.card.specialCard .lockBtn:hover,
+.card.specialCard .refreshBtn:hover {
+  background: rgba(255, 241, 173, 0.82);
+}
+.card.specialCard .actionBtn:hover {
+  opacity: 1;
+  background: #ecc54a;
+}
+#message.specialMessage::before {
+  content: 'Impatience meter full';
+  display: block;
+  position: absolute;
+  top: 14px;
+  left: 36px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a4d68;
+  line-height: 34px;
+  height: 34px;
+  margin-bottom: 0;
 }
 .small {
   color: #8a7280;
@@ -93,6 +151,25 @@ button {
   line-height: 1;
 }
 .lockBtn:hover {
+  background: #fff6fa;
+}
+.refreshBtn {
+  position: static;
+  right: auto;
+  bottom: auto;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #d9c7d0;
+  background: transparent;
+  color: #8a7280;
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: 1;
+  display: none;
+}
+.refreshBtn:hover {
   background: #fff6fa;
 }
 .quackBtn {
@@ -158,6 +235,25 @@ button {
 #duckOverlay {
   pointer-events: none;
   overflow: hidden;
+}
+.buttonWrap {
+  width: fit-content;
+  margin: 0 auto;
+}
+#impatienceMeter {
+  width: 100%;
+  height: 7px;
+  margin: 0 auto 10px;
+  background: #f3e8ed;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid #ead9e1;
+}
+#impatienceFill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #e6c9d5, #8a7280);
+  transition: width 0.28s ease;
 }
   position: fixed;
   inset: 0;
@@ -233,8 +329,13 @@ button {
   <button id="linkActionBtn" class="actionBtn" type="button">Yes</button>
 </a>
 <button id="actionBtn" class="actionBtn" type="button">Yes</button>
-<button id="nextBtn" class="primaryBtn" onclick="showRandomMessage()">I am impatient</button>
+
+<div id="buttonWrap" class="buttonWrap">
+  <div id="impatienceMeter"><div id="impatienceFill"></div></div>
+  <button id="nextBtn" class="primaryBtn" onclick="showRandomMessage()">I am impatient</button>
+</div>
 <button class="lockBtn" onclick="lockPage()">🔒</button>
+<button id="refreshBtn" class="refreshBtn" onclick="showRandomMessage()">↻</button>
 </div>
 </div>
 
@@ -276,16 +377,12 @@ const messages = [
   { text: "For when you need a small smile and I’m not nearby." },
   { text: "I maintain that time looks better on you." },
   { text: "You tapped, which means I win." },
-  { text: "Coffee at Harry's?", actionLabel: "Yes", actionUrl: "https://wa.me/?text=Coffee%20at%20Harry's%3F%20%E2%98%95" },
   { text: "Your wrist just got smarter" },
   { text: "Time looks better on you" },
   { text: "Every second suits you" },
   { text: "Wear this and think of me sometimes" },
   { text: "This watch now owns you" },
   { text: "Loading… responsible adult mode" },
-  { text: "Tap to unlock unlimited charisma", actionLabel: "Unlock", actionType: "charisma" },
-  { text: "A tiny shortcut to me", actionLabel: "Open", actionUrl: "https://wa.me/?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95" },
-  { text: "In case of emergency: tap", actionLabel: "Open", actionUrl: "https://wa.me/?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95" },
   { text: "Proof that I think of you<3" },
   { text: "Your wrist looks expensive now" },
   { text: "Time has excellent taste" },
@@ -294,14 +391,23 @@ const messages = [
   { text: "Small object, unreasonable meaning" },
   { text: "Now accepting compliments" },
   { text: "This watch is emotionally attached to you" },
-  { text: "Tap to receive dramatic validation", actionLabel: "Receive", actionType: "validation" },
   { text: "Luxury item detected" },
   { text: "Smart watch. Smarter owner." },
+  { text: "Coffee at Harry's?", actionLabel: "Is that even a question?", actionUrl: "https://wa.me/?text=Coffee%20at%20Harry's%3F%20%E2%98%95" },
+  { text: "Coffee at _______?", actionLabel: "Yes", actionUrl: "https://wa.me/?text=Coffee%20at%20_______%3F%20%E2%98%95" },
   { text: "Quack for a tiny surprise", actionLabel: "Quack", actionType: "quack" },
-  { text: "Walk later?", actionLabel: "Okay", actionUrl: "https://wa.me/?text=Walk%20later%3F%20%E2%9C%A8" },
-  { text: "Miss me enough for coffee?", actionLabel: "Maybe", actionUrl: "https://wa.me/?text=Miss%20you%20enough%20for%20coffee%20%E2%98%95" },
-  { text: "Dessert mission?", actionLabel: "Obviously", actionUrl: "https://wa.me/?text=Dessert%20mission%3F%20%F0%9F%8D%B0" }
+  { text: "A walk through the park?", actionLabel: "Okay", actionUrl: "https://wa.me/?text=Walk%20later%3F%20%E2%9C%A8" },
+  { text: "Dessert mission?", actionLabel: "Obviously", actionUrl: "https://wa.me/?text=Dessert%20mission%3F%20%F0%9F%8D%B0" },
+  { text: "A tiny shortcut to me", actionLabel: "Open", actionUrl: "https://wa.me/?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95" },
+  { text: "In case of emergency: tap", actionLabel: "Open", actionUrl: "https://wa.me/?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95" },
 ];
+const impatienceMessages = [
+  { text: "Miss me enough for coffee?", actionLabel: "Absolutely", actionUrl: "https://wa.me/?text=Miss%20you%20enough%20for%20coffee%20%E2%98%95", style: "special"  },
+  { text: "Brunch this week?", actionLabel: "That sounds like a good idea", actionUrl: "https://wa.me/?text=Brunch%20this%20week%3F%20sounds%20like%20a%20good%20idea.%20%E2%98%95", style: "special" },
+  { text: "Impatience can be charming on you. Tap to receive dramatic validation", actionLabel: "Receive", actionType: "validation", style: "special" },
+  { text: "You rushed ahead and somehow unlocked more charisma.", actionLabel: "Unlock", actionType: "charisma", style: "special" },
+];
+
 const dramaticLines = [
   "You are, in fact, absurdly easy to adore.",
   "This is your official notice that you look wonderful.",
@@ -312,6 +418,8 @@ const dramaticLines = [
 ];
 let remaining = [...messages];
 let failedAttempts = 0;
+let impatienceCount = 0;
+const impatienceThreshold = 8;
 
 async function sha256(text) {
  const data = new TextEncoder().encode(text);
@@ -365,12 +473,30 @@ async function checkPassword() {
  }
 }
 
+function updateImpatienceMeter() {
+ const fill = document.getElementById('impatienceFill');
+ const percentage = (impatienceCount / impatienceThreshold) * 100;
+ fill.style.width = Math.min(percentage, 100) + '%';
+}
+
+function showSpecialImpatienceMessage() {
+ const message = impatienceMessages[Math.floor(Math.random() * impatienceMessages.length)];
+ if (typeof message === 'string') {
+   showMessage({ text: message, style: 'special' });
+   return;
+ }
+ showMessage({ ...message, style: message.style || 'special' });
+}
+
 function showMessage(messageData) {
  const el = document.getElementById('message');
  const actionBtn = document.getElementById('actionBtn');
  const linkActionBtn = document.getElementById('linkActionBtn');
  const actionLink = document.getElementById('actionLink');
  const nextBtn = document.getElementById('nextBtn');
+ const buttonWrap = document.getElementById('buttonWrap');
+ const refreshBtn = document.getElementById('refreshBtn');
+ const isObjectMessage = typeof messageData === 'object' && messageData !== null;
  const text = typeof messageData === 'string' ? messageData : messageData.text;
 
  actionBtn.style.display = 'none';
@@ -382,18 +508,29 @@ function showMessage(messageData) {
  nextBtn.textContent = 'I am impatient';
  nextBtn.className = 'primaryBtn';
  nextBtn.onclick = showRandomMessage;
+ buttonWrap.style.display = 'block';
+ refreshBtn.style.display = 'none';
 
  el.style.opacity = 0;
+ el.classList.remove('specialMessage');
+ document.querySelector('.card').classList.remove('specialCard');
  setTimeout(() => {
    el.textContent = text;
+   if (isObjectMessage && messageData.style === 'special') {
+     el.classList.add('specialMessage');
+     document.querySelector('.card').classList.add('specialCard');
+   }
    el.style.opacity = 1;
 
    if (typeof messageData === 'object' && messageData.actionLabel) {
      nextBtn.style.display = 'none';
+     buttonWrap.style.display = 'none';
+     refreshBtn.style.display = 'inline-block';
+     refreshBtn.style.marginLeft = '8px';
      if (messageData.actionType === 'quack') {
-       nextBtn.textContent = 'Quack';
-       nextBtn.className = 'quackBtn';
-       nextBtn.onclick = quackForAnotherOne;
+       actionBtn.textContent = messageData.actionLabel;
+       actionBtn.style.display = 'inline-block';
+       actionBtn.onclick = quackForAnotherOne;
      } else if (messageData.actionType === 'charisma') {
        actionBtn.textContent = messageData.actionLabel;
        actionBtn.style.display = 'inline-block';
@@ -413,6 +550,15 @@ function showMessage(messageData) {
 }
 
 function showRandomMessage() {
+ impatienceCount++;
+ if (impatienceCount >= impatienceThreshold) {
+   impatienceCount = 0;
+   updateImpatienceMeter();
+   showSpecialImpatienceMessage();
+   return;
+ }
+
+ updateImpatienceMeter();
  if (remaining.length===0) remaining=[...messages];
  const i=Math.floor(Math.random()*remaining.length);
  const msg = remaining.splice(i,1)[0];
@@ -432,6 +578,8 @@ function closeValidation() {
 }
 
 function showCharismaUnlock() {
+ // keep current message visible, but advance the deck so the next refresh gives a fresh card
+ if (remaining.length===0) remaining=[...messages];
  const overlay = document.getElementById('charismaOverlay');
  const text = document.getElementById('charismaText');
  const fill = document.getElementById('charismaFill');
@@ -453,7 +601,6 @@ function closeCharisma() {
 }
 
 function quackForAnotherOne() {
- showRandomMessage();
  fillScreenWithDucks();
 }
 
@@ -479,6 +626,10 @@ function fillScreenWithDucks() {
 }
 
 function lockPage() {
+ impatienceCount = 0;
+ updateImpatienceMeter();
+ document.getElementById('buttonWrap').style.display = 'block';
+ document.getElementById('refreshBtn').style.display = 'none';
  localStorage.removeItem(STORAGE_KEY);
  failedAttempts = 0;
  document.getElementById('hint').innerHTML = '';
@@ -495,8 +646,10 @@ window.addEventListener('load', () => {
  if (unlocked) {
    document.getElementById('loginPage').style.display='none';
    document.getElementById('messagePage').style.display='block';
+   updateImpatienceMeter();
    showRandomMessage();
  } else {
+   updateImpatienceMeter();
    document.getElementById('passwordInput').focus();
  }
 });
