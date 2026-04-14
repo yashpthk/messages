@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>☕</title>
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg,#fffafc,#ffffff);
+  font-family: Georgia, serif;
+  padding: 24px;
+}
+.card {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  padding: 36px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+input {
+  padding: 12px;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  font-size: 16px;
+}
+button {
+  margin-top: 14px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #2f2430;
+  color: white;
+  cursor: pointer;
+}
+.actionBtn {
+  display: none;
+  margin: 8px auto 0;
+  background: transparent;
+  color: #8a7280;
+  border: 1px solid #d9c7d0;
+}
+.actionBtn:hover {
+  background: #fff6fa;
+}
+#messagePage { display: none; }
+#message {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  margin: 24px 0;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.small {
+  color: #8a7280;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.error { color: crimson; margin-top: 10px; }
+.hint { color:#8a7280; margin-top:10px; min-height:48px; }
+.lockBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #d9c7d0;
+  background: transparent;
+  color: #8a7280;
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: 1;
+}
+.lockBtn:hover {
+  background: #fff6fa;
+}
+</style>
+</head>
+<body>
+<div class="card">
+<div id="loginPage">
+<div style="font-size:40px;line-height:1;">☕</div>
+<div id="hint" class="hint"></div>
+<input type="password" id="passwordInput" placeholder="Password">
+<br>
+<button onclick="checkPassword()">Open</button>
+<div class="error" id="error"></div>
+</div>
+<div id="messagePage">
+<p id="message"></p>
+<a id="actionLink" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+  <button id="actionBtn" class="actionBtn">Yes</button>
+</a>
+<button onclick="showRandomMessage()">Another one</button>
+<button class="lockBtn" onclick="lockPage()">🔒</button>
+</div>
+</div>
+<script>
+const PASSWORD_HASH = "a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651";
+const FIRST_UNLOCK_MESSAGE = "You tapped. So now I get to remind you that you’re one of my favorite people.";
+const STORAGE_KEY = "messagesUnlocked";
+const messages = [
+  { text: "A tiny shortcut to a small smile." },
+  { text: "You were worth the extra thought." },
+  { text: "For the moments between moments." },
+  { text: "You make things feel warmer just by being in them." },
+  { text: "A little evidence that you cross my mind more than I admit." },
+  { text: "You look expensive. The watch is trying to keep up." },
+  { text: "For when you need a small smile and I’m not nearby." },
+  { text: "I maintain that time looks better on you." },
+  { text: "You tapped, which means I win." },
+  { text: "Coffee at Harry's?", actionLabel: "Yes", actionUrl: "https://wa.me/?text=Coffee%20at%20Harry's%3F%20%E2%98%95" }
+];
+let remaining = [...messages];
+let failedAttempts = 0;
+async function sha256(text) {
+ const data = new TextEncoder().encode(text);
+ const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+ const hashArray = Array.from(new Uint8Array(hashBuffer));
+ return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkPassword() {
+ try {
+   const entered = document.getElementById('passwordInput').value.trim();
+   const enteredHash = await sha256(entered.toLowerCase());
+
+   if (enteredHash === PASSWORD_HASH.toLowerCase()) {
+     failedAttempts = 0;
+     localStorage.setItem(STORAGE_KEY, 'true');
+     document.getElementById('error').textContent = '';
+     document.getElementById('hint').innerHTML = '';
+     document.getElementById('passwordInput').value = '';
+     document.getElementById('loginPage').style.display='none';
+     document.getElementById('messagePage').style.display='block';
+     showMessage(FIRST_UNLOCK_MESSAGE);
+   } else {
+     failedAttempts++;
+     document.getElementById('error').textContent='';
+     document.getElementById('hint').textContent='Not quite. Try something we would go.';
+     if (failedAttempts >= 2) {
+       document.getElementById('hint').innerHTML='<div>Think of a café.</div>';
+     }
+     if (failedAttempts >= 3) {
+       document.getElementById('hint').innerHTML='<div>Its not complicated.</div>';
+     }
+     if (failedAttempts >= 4) {
+       document.getElementById('hint').innerHTML='<div>You are definitely overthinking this.</div>';
+     }
+     if (failedAttempts >= 5) {
+       document.getElementById('hint').innerHTML='<div>I am running out of hints.</div>';
+     }
+     if (failedAttempts >= 6) {
+       document.getElementById('hint').innerHTML='<div>How have you not guessed it yet!</div>';
+     }
+     if (failedAttempts >= 7) {
+       document.getElementById('hint').innerHTML='<div>Think of a café nearby.</div>';
+     }
+     if (failedAttempts >= 8) {
+       document.getElementById('hint').innerHTML='<div>T_R_B_</div>';
+     }
+   }
+ } catch (e) {
+   document.getElementById('error').textContent='This page needs to be opened from a secure site like GitHub Pages, not as a local file.';
+ }
+}
+function showMessage(messageData) {
+ const el = document.getElementById('message');
+ const actionBtn = document.getElementById('actionBtn');
+ const actionLink = document.getElementById('actionLink');
+ const text = typeof messageData === 'string' ? messageData : messageData.text;
+
+ actionBtn.style.display = 'none';
+ actionLink.href = '#';
+
+ el.style.opacity = 0;
+ setTimeout(() => {
+   el.textContent = text;
+   el.style.opacity = 1;
+
+   if (typeof messageData === 'object' && messageData.actionLabel && messageData.actionUrl) {
+     actionBtn.textContent = messageData.actionLabel;
+     actionLink.href = messageData.actionUrl;
+     actionBtn.style.display = 'inline-block';
+   }
+ }, 120);
+}
+
+function showRandomMessage() {
+ if (remaining.length===0) remaining=[...messages];
+ const i=Math.floor(Math.random()*remaining.length);
+ const msg = remaining.splice(i,1)[0];
+ showMessage(msg);
+}
+
+function lockPage() {
+ localStorage.removeItem(STORAGE_KEY);
+ failedAttempts = 0;
+ document.getElementById('hint').innerHTML = '';
+ document.getElementById('error').textContent = '';
+ document.getElementById('passwordInput').value = '';
+ document.getElementById('messagePage').style.display='none';
+ document.getElementById('loginPage').style.display='block';
+ document.getElementById('passwordInput').focus();
+}
+document.getElementById('passwordInput').addEventListener('keydown', function(e){ if(e.key==='Enter') checkPassword();});
+window.addEventListener('load', () => {
+ const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
+ if (unlocked) {
+   document.getElementById('loginPage').style.display='none';
+   document.getElementById('messagePage').style.display='block';
+   showRandomMessage();
+ } else {
+   document.getElementById('passwordInput').focus();
+ }
+});
+</script>
+</body>
+</html>
