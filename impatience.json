@@ -1,8 +1,53 @@
 [
-  { "text": "Miss me enough for coffee?", "actionLabel": "Absolutely", "actionUrl": "https://wa.me/?text=Miss%20you%20enough%20for%20coffee%20%E2%98%95", "style": "special" },
-  { "text": "Brunch this week?", "actionLabel": "That sounds like a good idea", "actionUrl": "https://wa.me/?text=Brunch%20this%20week%3F%20That%20sounds%20like%20a%20good%20idea.%20%E2%98%95", "style": "special" },
-  { "text": "Impatience can be charming on you. Tap to receive dramatic validation", "actionLabel": "Receive", "actionType": "validation", "style": "special" },
-  { "text": "You rushed ahead and somehow unlocked more charisma.", "actionLabel": "Unlock", "actionType": "charisma", "style": "special" },
-  { "text": "Tap for suspiciously accurate fortune", "actionLabel": "Reveal", "actionType": "fortune", "style": "special" },
-  { "text": "Press for unnecessary chaos", "actionLabel": "Do it", "actionType": "chaos", "style": "special" }
+  {
+    "text": "Miss me enough for coffee?",
+    "actionLabel": "Absolutely",
+    "actionUrl": "https://wa.me/?text=Miss%20you%20enough%20for%20coffee%20%E2%98%95",
+    "style": "special"
+  },
+  {
+    "text": "Brunch this week?",
+    "actionLabel": "That sounds like a good idea",
+    "actionUrl": "https://wa.me/?text=Brunch%20this%20week%3F%20That%20sounds%20like%20a%20good%20idea.%20%E2%98%95",
+    "style": "special"
+  },
+  {
+    "text": "Quack for a tiny surprise",
+    "actionLabel": "Quack",
+    "actionType": "quack"
+  },
+  {
+    "text": "Impatience can be charming on you. Tap to receive dramatic validation",
+    "actionLabel": "Receive",
+    "actionType": "validation",
+    "style": "special"
+  },
+  {
+    "text": "Tap for suspiciously accurate fortune",
+    "actionLabel": "Reveal",
+    "actionType": "fortune"
+  },
+  {
+    "text": "Press for unnecessary chaos",
+    "actionLabel": "Do it",
+    "actionType": "chaos"
+  },
+  {
+    "text": "You rushed ahead and somehow unlocked more charisma.",
+    "actionLabel": "Unlock",
+    "actionType": "charisma",
+    "style": "special"
+  },
+  {
+    "text": "Tap for suspiciously accurate fortune",
+    "actionLabel": "Reveal",
+    "actionType": "fortune",
+    "style": "special"
+  },
+  {
+    "text": "Press for unnecessary chaos",
+    "actionLabel": "Do it",
+    "actionType": "chaos",
+    "style": "special"
+  }
 ]
