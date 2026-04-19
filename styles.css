@@ -97,6 +97,10 @@ button {
 }
 
 #message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     min-height: 4.8em;
     font-size: 1.8rem;
     line-height: 1.5;
@@ -112,23 +116,7 @@ button {
     letter-spacing: 0.01em;
 }
 
-#message.specialMessage::before {
-    content: 'Impatience meter full';
-    display: block;
-    position: absolute;
-    top: 14px;
-    left: 36px;
-    text-align: left;
-    font-family: Arial, sans-serif;
-    font-size: 0.72rem;
-    font-style: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #7a4d68;
-    line-height: 34px;
-    height: 34px;
-    margin-bottom: 0;
-}
+
 
 .small {
     color: #8a7280;
@@ -169,7 +157,6 @@ button {
 }
 
 .refreshBtn {
-    display: none;
     position: absolute;
     top: 14px;
     right: 56px;
@@ -316,24 +303,3 @@ button {
     }
 }
 
-.buttonWrap {
-    width: fit-content;
-    margin: 0 auto;
-}
-
-#impatienceMeter {
-    width: 100%;
-    height: 7px;
-    margin: 0 auto 10px;
-    background: #f3e8ed;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 1px solid #ead9e1;
-}
-
-#impatienceFill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #e6c9d5, #8a7280);
-    transition: width 0.28s ease;
-}
