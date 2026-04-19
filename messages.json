@@ -1,44 +1,147 @@
 [
-  { "text": "A tiny shortcut to a small smile." },
-  { "text": "You were worth the extra thought." },
-  { "text": "For the moments between moments." },
-  { "text": "You make things feel warmer just by being in them." },
-  { "text": "A little evidence that you cross my mind more than I admit." },
-  { "text": "You look expensive. The watch is trying to keep up." },
-  { "text": "For when you need a small smile and I’m not nearby." },
-  { "text": "I maintain that time looks better on you." },
-  { "text": "You tapped, which means I win." },
-  { "text": "Your wrist just got smarter" },
-  { "text": "Time looks better on you" },
-  { "text": "Every second suits you" },
-  { "text": "Wear this and think of me sometimes" },
-  { "text": "This watch now owns you" },
-  { "text": "Loading… responsible adult mode" },
-  { "text": "Proof that I think of you<3" },
-  { "text": "Your wrist looks expensive now" },
-  { "text": "Time has excellent taste" },
-  { "text": "You wear attention very well" },
-  { "text": "Some things deserve more time" },
-  { "text": "Small object, unreasonable meaning" },
-  { "text": "Now accepting compliments" },
-  { "text": "This watch is emotionally attached to you" },
-  { "text": "Luxury item detected" },
-  { "text": "Smart watch. Smarter owner." },
-  { "text": "Coffee at Harry's?", "actionLabel": "Is that even a question?", "actionUrl": "https://wa.me/?text=Coffee%20at%20Harry%27s%3F%20%E2%98%95" },
-  { "text": "Coffee at _______?", "actionLabel": "Yes", "actionUrl": "https://wa.me/?text=Coffee%20at%20_______%3F%20%E2%98%95" },
-  { "text": "Quack for a tiny surprise", "actionLabel": "Quack", "actionType": "quack" },
-  { "text": "A walk through the park?", "actionLabel": "Okay", "actionUrl": "https://wa.me/?text=Walk%20later%3F%20%E2%9C%A8" },
-  { "text": "Dessert mission?", "actionLabel": "Obviously", "actionUrl": "https://wa.me/?text=Dessert%20mission%3F%20%F0%9F%8D%B0" },
-  { "text": "A tiny shortcut to me", "actionLabel": "Open", "actionUrl": "https://wa.me/?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95" },
-  { "text": "In case of emergency: tap", "actionLabel": "Open", "actionUrl": "https://wa.me/?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95" },
-  { "text": "Coffee soon?", "actionLabel": "Dangerously yes", "actionUrl": "https://wa.me/?text=Coffee%20soon%3F%20Dangerously%20yes.%20%E2%98%95" },
-  { "text": "Lunch this week?", "actionLabel": "I could be convinced", "actionUrl": "https://wa.me/?text=Lunch%20this%20week%3F%20I%20could%20be%20convinced.%20%E2%9C%A8" },
-  { "text": "A walk and a life debrief?", "actionLabel": "Reasonable", "actionUrl": "https://wa.me/?text=A%20walk%20and%20a%20life%20debrief%3F%20Reasonable.%20%F0%9F%8C%BF" },
-  { "text": "Tap if you forgot you're impressive", "actionLabel": "Remind me", "actionType": "validation" },
-  { "text": "Emergency compliment protocol", "actionLabel": "Deploy", "actionType": "validation" },
-  { "text": "Need extra charm today?", "actionLabel": "Load it", "actionType": "charisma" },
-  { "text": "Social event incoming?", "actionLabel": "Buff me", "actionType": "charisma" },
-  { "text": "Tap for suspiciously accurate fortune", "actionLabel": "Reveal", "actionType": "fortune" },
-  { "text": "Press for unnecessary chaos", "actionLabel": "Do it", "actionType": "chaos" },
-  { "text": "This feels like a coffee invitation in disguise", "actionLabel": "Correct", "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95" }
+  {
+    "text": "A tiny shortcut to a small smile."
+  },
+  {
+    "text": "You were worth the extra thought."
+  },
+  {
+    "text": "For the moments between moments."
+  },
+  {
+    "text": "You make things feel warmer just by being in them."
+  },
+  {
+    "text": "A little evidence that you cross my mind more than I admit."
+  },
+  {
+    "text": "You look expensive. The watch is trying to keep up."
+  },
+  {
+    "text": "For when you need a small smile and I’m not nearby."
+  },
+  {
+    "text": "I maintain that time looks better on you."
+  },
+  {
+    "text": "You tapped, which means I win."
+  },
+  {
+    "text": "Your wrist just got smarter"
+  },
+  {
+    "text": "Time looks better on you"
+  },
+  {
+    "text": "Every second suits you"
+  },
+  {
+    "text": "Wear this and think of me sometimes"
+  },
+  {
+    "text": "This watch now owns you"
+  },
+  {
+    "text": "Loading… responsible adult mode"
+  },
+  {
+    "text": "Proof that I think of you<3"
+  },
+  {
+    "text": "Your wrist looks expensive now"
+  },
+  {
+    "text": "Time has excellent taste"
+  },
+  {
+    "text": "You wear attention very well"
+  },
+  {
+    "text": "Some things deserve more time"
+  },
+  {
+    "text": "Small object, unreasonable meaning"
+  },
+  {
+    "text": "Now accepting compliments"
+  },
+  {
+    "text": "This watch is emotionally attached to you"
+  },
+  {
+    "text": "Luxury item detected"
+  },
+  {
+    "text": "Smart watch. Smarter owner."
+  },
+  {
+    "text": "Coffee at Harry's?",
+    "actionLabel": "Is that even a question?",
+    "actionUrl": "https://wa.me/?text=Coffee%20at%20Harry%27s%3F%20%E2%98%95"
+  },
+  {
+    "text": "Coffee at _______?",
+    "actionLabel": "Yes",
+    "actionUrl": "https://wa.me/?text=Coffee%20at%20_______%3F%20%E2%98%95"
+  },
+  {
+    "text": "A walk through the park?",
+    "actionLabel": "Okay",
+    "actionUrl": "https://wa.me/?text=Walk%20later%3F%20%E2%9C%A8"
+  },
+  {
+    "text": "Dessert mission?",
+    "actionLabel": "Obviously",
+    "actionUrl": "https://wa.me/?text=Dessert%20mission%3F%20%F0%9F%8D%B0"
+  },
+  {
+    "text": "A tiny shortcut to me",
+    "actionLabel": "Open",
+    "actionUrl": "https://wa.me/?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95"
+  },
+  {
+    "text": "In case of emergency: tap",
+    "actionLabel": "Open",
+    "actionUrl": "https://wa.me/?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95"
+  },
+  {
+    "text": "Coffee soon?",
+    "actionLabel": "Dangerously yes",
+    "actionUrl": "https://wa.me/?text=Coffee%20soon%3F%20Dangerously%20yes.%20%E2%98%95"
+  },
+  {
+    "text": "Lunch this week?",
+    "actionLabel": "I could be convinced",
+    "actionUrl": "https://wa.me/?text=Lunch%20this%20week%3F%20I%20could%20be%20convinced.%20%E2%9C%A8"
+  },
+  {
+    "text": "A walk and a life debrief?",
+    "actionLabel": "Reasonable",
+    "actionUrl": "https://wa.me/?text=A%20walk%20and%20a%20life%20debrief%3F%20Reasonable.%20%F0%9F%8C%BF"
+  },
+  {
+    "text": "Tap if you forgot you're impressive",
+    "actionLabel": "Remind me",
+    "actionType": "validation"
+  },
+  {
+    "text": "Emergency compliment protocol",
+    "actionLabel": "Deploy",
+    "actionType": "validation"
+  },
+  {
+    "text": "Need extra charm today?",
+    "actionLabel": "Load it",
+    "actionType": "charisma"
+  },
+  {
+    "text": "Social event incoming?",
+    "actionLabel": "Buff me",
+    "actionType": "charisma"
+  },
+  {
+    "text": "This feels like a coffee invitation in disguise",
+    "actionLabel": "Correct",
+    "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95"
+  }
 ]
