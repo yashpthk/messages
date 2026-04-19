@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>☕</title>
-        <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -28,15 +28,7 @@
                 <button id="linkActionBtn" class="actionBtn" type="button">Yes</button>
             </a>
             <button id="actionBtn" class="actionBtn" type="button">Yes</button>
-            <button id="refreshBtn" class="refreshBtn" type="button" onclick="showRandomMessage()">↻</button>
-
-            <div id="buttonWrap" class="buttonWrap">
-                <div id="impatienceMeter">
-                    <div id="impatienceFill"></div>
-                </div>
-                <button id="nextBtn" class="primaryBtn" type="button" onclick="showRandomMessage()">I am
-                    impatient</button>
-            </div>
+            <button id="refreshBtn" class="refreshBtn" type="button" onclick="onRefresh()">↻</button>
 
             <button class="lockBtn" type="button" onclick="lockPage()">🔒</button>
         </div>
@@ -71,7 +63,7 @@
 
     <div id="duckOverlay"></div>
 
-        <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
