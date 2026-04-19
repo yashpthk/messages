@@ -7,27 +7,21 @@ let chaosLines = [];
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
 const FIRST_UNLOCK_MESSAGE = 'Happy Birthday! ';
 const STORAGE_KEY = 'messagesUnlocked';
-const impatienceThreshold = 8;
 
 let messages = [];
-
-let impatienceMessages = [];
 
 let dramaticLines = [];
 
 let remaining = [];
-let remainingImpatience = [];
 let failedAttempts = 0;
-let impatienceCount = 0;
+let manualRefresh = false;
 
 const dataLoaded = Promise.all([
     fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }),
     fetch('fortunes.json').then(r => r.json()).then(d => fortuneLines = d),
     fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d),
     fetch('chaos.json').then(r => r.json()).then(d => chaosLines = d),
-    fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d),
-
-    fetch('impatience.json').then(r => r.json()).then(d => impatienceMessages = d)
+    fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d)
 ]).catch(e => console.error(e));
 
 function getRandomItem(items) {
@@ -39,6 +33,10 @@ function getDeckMessage() {
         remaining = [...messages];
     }
     const index = Math.floor(Math.random() * remaining.length);
+    const messageData = remaining[index];
+    if (messageData.style === 'special' && !manualRefresh) {
+        return getDeckMessage();
+    }
     return remaining.splice(index, 1)[0];
 }
 
@@ -82,27 +80,6 @@ async function checkPassword() {
     }
 }
 
-function updateImpatienceMeter() {
-    const fill = document.getElementById('impatienceFill');
-    const percentage = (impatienceCount / impatienceThreshold) * 100;
-    fill.style.width = Math.min(percentage, 100) + '%';
-}
-
-function getImpatienceMessage() {
-    if (remainingImpatience.length === 0) {
-        remainingImpatience = [...impatienceMessages];
-    }
-    const index = Math.floor(Math.random() * remainingImpatience.length);
-    return remainingImpatience.splice(index, 1)[0];
-}
-
-function showSpecialImpatienceMessage() {
-    const message = getImpatienceMessage();
-    showMessage({ ...message, style: message.style || 'special' });
-}
-
-
-
 function clearCardModes() {
     const card = document.getElementById('mainCard');
     card.classList.remove('specialCard', 'validationCard', 'charismaCard', 'fortuneCard', 'chaosCard');
@@ -124,8 +101,6 @@ function resetActionUi() {
     const actionBtn = document.getElementById('actionBtn');
     const linkActionBtn = document.getElementById('linkActionBtn');
     const actionLink = document.getElementById('actionLink');
-    const nextBtn = document.getElementById('nextBtn');
-    const buttonWrap = document.getElementById('buttonWrap');
     const refreshBtn = document.getElementById('refreshBtn');
 
     actionBtn.style.display = 'none';
@@ -133,12 +108,7 @@ function resetActionUi() {
     linkActionBtn.style.display = 'none';
     actionLink.style.display = 'none';
     actionLink.href = '#';
-    nextBtn.style.display = 'inline-block';
-    nextBtn.textContent = 'I am impatient';
-    nextBtn.className = 'primaryBtn';
-    nextBtn.onclick = showRandomMessage;
-    buttonWrap.style.display = 'block';
-    refreshBtn.style.display = 'none';
+    refreshBtn.style.display = 'inline-block';
 }
 
 function showMessage(messageData) {
@@ -146,8 +116,6 @@ function showMessage(messageData) {
     const actionBtn = document.getElementById('actionBtn');
     const linkActionBtn = document.getElementById('linkActionBtn');
     const actionLink = document.getElementById('actionLink');
-    const nextBtn = document.getElementById('nextBtn');
-    const buttonWrap = document.getElementById('buttonWrap');
     const refreshBtn = document.getElementById('refreshBtn');
     const isObjectMessage = typeof messageData === 'object' && messageData !== null;
     const text = typeof messageData === 'string' ? messageData : messageData.text;
@@ -168,9 +136,6 @@ function showMessage(messageData) {
         applyCardMode(messageData);
 
         if (isObjectMessage && messageData.actionLabel) {
-            nextBtn.style.display = 'none';
-            buttonWrap.style.display = 'none';
-            if (messageData.style !== 'special') refreshBtn.style.display = 'inline-block';
 
             if (messageData.actionType === 'quack') {
                 actionBtn.textContent = messageData.actionLabel;
@@ -204,20 +169,12 @@ function showMessage(messageData) {
     }, 120);
 }
 
+function onRefresh() {
+    manualRefresh = true;
+    showRandomMessage();
+}
+
 function showRandomMessage() {
-    impatienceCount += 1;
-
-    if (impatienceCount >= impatienceThreshold) {
-        impatienceCount = 0;
-        updateImpatienceMeter();
-        showSpecialImpatienceMessage();
-        return;
-    }
-
-    updateImpatienceMeter();
-
-
-
     showMessage(getDeckMessage());
 }
 
@@ -295,8 +252,6 @@ function fillScreenWithEmoji(emoji) {
 }
 
 function lockPage() {
-    impatienceCount = 0;
-    updateImpatienceMeter();
     localStorage.removeItem(STORAGE_KEY);
     failedAttempts = 0;
     document.getElementById('hint').innerHTML = '';
@@ -312,10 +267,8 @@ function lockPage() {
 
 function runSmokeTests() {
     console.assert(Array.isArray(messages) && messages.length > 0, 'messages should exist');
-    console.assert(Array.isArray(impatienceMessages) && impatienceMessages.length > 0, 'impatienceMessages should exist');
 
     console.assert(typeof PASSWORD_HASH === 'string' && PASSWORD_HASH.length === 64, 'password hash should look like sha256');
-    console.assert(typeof impatienceThreshold === 'number' && impatienceThreshold > 0, 'impatience threshold should be positive');
     console.assert(typeof clearCardModes === 'function', 'clearCardModes should exist');
     console.assert(typeof applyCardMode === 'function', 'applyCardMode should exist');
 }
@@ -329,7 +282,6 @@ document.getElementById('passwordInput').addEventListener('keydown', (e) => {
 window.addEventListener('load', () => {
     dataLoaded.then(() => {
         runSmokeTests();
-        updateImpatienceMeter();
 
         const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
         if (unlocked) {
