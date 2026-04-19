@@ -21,13 +21,15 @@ let remaining = [];
 let failedAttempts = 0;
 let impatienceCount = 0;
 
-fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }).catch(e => console.error(e));
-fetch('fortunes.json').then(r => r.json()).then(d => fortuneLines = d).catch(e => console.error(e));
-fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d).catch(e => console.error(e));
-fetch('chaos.json').then(r => r.json()).then(d => chaosLines = d).catch(e => console.error(e));
-fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d).catch(e => console.error(e));
-fetch('rare.json').then(r => r.json()).then(d => rareMessages = d).catch(e => console.error(e));
-fetch('impatience.json').then(r => r.json()).then(d => impatienceMessages = d).catch(e => console.error(e));
+const dataLoaded = Promise.all([
+    fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }),
+    fetch('fortunes.json').then(r => r.json()).then(d => fortuneLines = d),
+    fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d),
+    fetch('chaos.json').then(r => r.json()).then(d => chaosLines = d),
+    fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d),
+    fetch('rare.json').then(r => r.json()).then(d => rareMessages = d),
+    fetch('impatience.json').then(r => r.json()).then(d => impatienceMessages = d)
+]).catch(e => console.error(e));
 
 function getRandomItem(items) {
     return items[Math.floor(Math.random() * items.length)];
@@ -324,15 +326,17 @@ document.getElementById('passwordInput').addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('load', () => {
-    runSmokeTests();
-    updateImpatienceMeter();
+    dataLoaded.then(() => {
+        runSmokeTests();
+        updateImpatienceMeter();
 
-    const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
-    if (unlocked) {
-        document.getElementById('loginPage').style.display = 'none';
-        document.getElementById('messagePage').style.display = 'block';
-        showRandomMessage();
-    } else {
-        document.getElementById('passwordInput').focus();
-    }
+        const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
+        if (unlocked) {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('messagePage').style.display = 'block';
+            showRandomMessage();
+        } else {
+            document.getElementById('passwordInput').focus();
+        }
+    });
 });
