@@ -4,10 +4,8 @@ let fortuneLines = [];
 
 let chaosLines = [];
 
-let rareMessages = [];
-
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
-const FIRST_UNLOCK_MESSAGE = 'You tapped. So now I get to remind you that you’re one of my favorite people.';
+const FIRST_UNLOCK_MESSAGE = 'Happy Birthday! ';
 const STORAGE_KEY = 'messagesUnlocked';
 const impatienceThreshold = 8;
 
@@ -28,7 +26,7 @@ const dataLoaded = Promise.all([
     fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d),
     fetch('chaos.json').then(r => r.json()).then(d => chaosLines = d),
     fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d),
-    fetch('rare.json').then(r => r.json()).then(d => rareMessages = d),
+
     fetch('impatience.json').then(r => r.json()).then(d => impatienceMessages = d)
 ]).catch(e => console.error(e));
 
@@ -103,10 +101,7 @@ function showSpecialImpatienceMessage() {
     showMessage({ ...message, style: message.style || 'special' });
 }
 
-function showRareMessage() {
-    const message = getRandomItem(rareMessages);
-    showMessage({ ...message, style: message.style || 'special' });
-}
+
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
@@ -118,7 +113,6 @@ function applyCardMode(messageData) {
     if (!messageData || typeof messageData !== 'object') return;
 
     if (messageData.style === 'special') card.classList.add('specialCard');
-    if (messageData.style === 'rare') card.classList.add('validationCard');
 
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');
@@ -222,10 +216,7 @@ function showRandomMessage() {
 
     updateImpatienceMeter();
 
-    if (Math.random() < 0.06) {
-        showRareMessage();
-        return;
-    }
+
 
     showMessage(getDeckMessage());
 }
@@ -322,7 +313,7 @@ function lockPage() {
 function runSmokeTests() {
     console.assert(Array.isArray(messages) && messages.length > 0, 'messages should exist');
     console.assert(Array.isArray(impatienceMessages) && impatienceMessages.length > 0, 'impatienceMessages should exist');
-    console.assert(Array.isArray(rareMessages) && rareMessages.length > 0, 'rareMessages should exist');
+
     console.assert(typeof PASSWORD_HASH === 'string' && PASSWORD_HASH.length === 64, 'password hash should look like sha256');
     console.assert(typeof impatienceThreshold === 'number' && impatienceThreshold > 0, 'impatience threshold should be positive');
     console.assert(typeof clearCardModes === 'function', 'clearCardModes should exist');
