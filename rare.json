@@ -1,6 +1,20 @@
 [
-  { "text": "Rare drop: you have been especially thought of.", "style": "rare" },
-  { "text": "This card appears only for favorites.", "style": "rare" },
-  { "text": "A rare message, because subtlety has limits.", "style": "rare" },
-  { "text": "This feels like a coffee invitation in disguise", "actionLabel": "Correct", "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95", "style": "rare" }
+  {
+    "text": "Rare drop: you have been especially thought of.",
+    "style": "rare"
+  },
+  {
+    "text": "This card appears only for favorites.",
+    "style": "rare"
+  },
+  {
+    "text": "A rare message, because subtlety has limits.",
+    "style": "rare"
+  },
+  {
+    "text": "This feels like a coffee invitation in disguise",
+    "actionLabel": "Correct",
+    "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95",
+    "style": "rare"
+  }
 ]
