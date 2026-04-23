@@ -164,11 +164,6 @@
     "style": "special"
   },
   {
-    "text": "Tap for suspiciously accurate fortune",
-    "actionLabel": "Reveal",
-    "actionType": "fortune"
-  },
-  {
     "text": "Press for unnecessary chaos",
     "actionLabel": "Do it",
     "actionType": "chaos"
@@ -177,12 +172,6 @@
     "text": "You rushed ahead and somehow unlocked more charisma.",
     "actionLabel": "Unlock",
     "actionType": "charisma",
-    "style": "special"
-  },
-  {
-    "text": "Tap for suspiciously accurate fortune",
-    "actionLabel": "Reveal",
-    "actionType": "fortune",
     "style": "special"
   },
   {

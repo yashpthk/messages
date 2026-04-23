@@ -39,11 +39,6 @@ body {
     box-shadow: 0 12px 30px rgba(242, 198, 109, 0.22);
 }
 
-.card.fortuneCard {
-    border-color: #b727f4;
-    box-shadow: 0 12px 30px rgba(116, 170, 255, 0.18);
-}
-
 .card.chaosCard {
     border-color: #7fe0bf;
     box-shadow: 0 12px 30px rgba(88, 212, 170, 0.2);
@@ -205,7 +200,6 @@ button {
 
 #validationOverlay,
 #charismaOverlay,
-#fortuneOverlay,
 #chaosOverlay,
 #duckOverlay {
     position: fixed;
@@ -218,7 +212,6 @@ button {
 
 #validationOverlay,
 #charismaOverlay,
-#fortuneOverlay,
 #chaosOverlay {
     background: rgba(255, 250, 252, 0.92);
     padding: 24px;
@@ -227,7 +220,6 @@ button {
 
 #validationText,
 #charismaText,
-#fortuneText,
 #chaosText {
     max-width: 720px;
     color: #2f2430;
@@ -248,7 +240,6 @@ button {
 
 #validationClose,
 #charismaClose,
-#fortuneClose,
 #chaosClose {
     position: absolute;
     top: 22px;

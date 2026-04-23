@@ -1,7 +1,5 @@
 let charismaLines = [];
 
-let fortuneLines = [];
-
 let chaosLines = [];
 
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
@@ -18,7 +16,6 @@ let manualRefresh = false;
 
 const dataLoaded = Promise.all([
     fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }),
-    fetch('fortunes.json').then(r => r.json()).then(d => fortuneLines = d),
     fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d),
     fetch('chaos.json').then(r => r.json()).then(d => chaosLines = d),
     fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d)
@@ -82,7 +79,7 @@ async function checkPassword() {
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
-    card.classList.remove('specialCard', 'validationCard', 'charismaCard', 'fortuneCard', 'chaosCard');
+    card.classList.remove('specialCard', 'validationCard', 'charismaCard', 'chaosCard');
 }
 
 function applyCardMode(messageData) {
@@ -93,7 +90,6 @@ function applyCardMode(messageData) {
 
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');
-    else if (messageData.actionType === 'fortune') card.classList.add('fortuneCard');
     else if (messageData.actionType === 'chaos') card.classList.add('chaosCard');
 }
 
@@ -145,10 +141,6 @@ function showMessage(messageData) {
                 actionBtn.textContent = messageData.actionLabel;
                 actionBtn.style.display = 'inline-block';
                 actionBtn.onclick = showCharismaUnlock;
-            } else if (messageData.actionType === 'fortune') {
-                actionBtn.textContent = messageData.actionLabel;
-                actionBtn.style.display = 'inline-block';
-                actionBtn.onclick = showFortune;
             } else if (messageData.actionType === 'chaos') {
                 actionBtn.textContent = messageData.actionLabel;
                 actionBtn.style.display = 'inline-block';
@@ -203,15 +195,6 @@ function showCharismaUnlock() {
 
 function closeCharisma() {
     document.getElementById('charismaOverlay').style.display = 'none';
-}
-
-function showFortune() {
-    document.getElementById('fortuneText').textContent = getRandomItem(fortuneLines);
-    document.getElementById('fortuneOverlay').style.display = 'flex';
-}
-
-function closeFortune() {
-    document.getElementById('fortuneOverlay').style.display = 'none';
 }
 
 function showChaos() {
