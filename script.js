@@ -66,14 +66,14 @@ async function checkPassword() {
 
         failedAttempts += 1;
         document.getElementById('error').textContent = '';
-        document.getElementById('hint').textContent = 'Not quite. Try something we would go.';
+        document.getElementById('hint').textContent = 'Not quite.';
 
         if (failedAttempts >= 2) document.getElementById('hint').innerHTML = '<div>Think of a café.</div>';
         if (failedAttempts >= 3) document.getElementById('hint').innerHTML = '<div>Its not complicated.</div>';
         if (failedAttempts >= 4) document.getElementById('hint').innerHTML = '<div>You are definitely overthinking this.</div>';
-        if (failedAttempts >= 5) document.getElementById('hint').innerHTML = '<div>I am running out of hints.</div>';
-        if (failedAttempts >= 6) document.getElementById('hint').innerHTML = '<div>How have you not guessed it yet!</div>';
-        if (failedAttempts >= 7) document.getElementById('hint').innerHTML = '<div>Think of a café nearby.</div>';
+        if (failedAttempts >= 5) document.getElementById('hint').innerHTML = '<div>Think of a café nearby.</div>';
+        if (failedAttempts >= 6) document.getElementById('hint').innerHTML = '<div>I am running out of hints.</div>';
+        if (failedAttempts >= 7) document.getElementById('hint').innerHTML = '<div>How have you not guessed it yet!</div>';
         if (failedAttempts >= 8) document.getElementById('hint').innerHTML = '<div>T_R_B_</div>';
     } catch (e) {
         document.getElementById('error').textContent = 'This page needs to be opened from a secure site like GitHub Pages, not as a local file.';
@@ -235,20 +235,40 @@ function fillScreenWithEmoji(emoji) {
     overlay.style.display = 'block';
     overlay.innerHTML = '';
 
-    for (let i = 0; i < 26; i += 1) {
-        const duck = document.createElement('div');
-        duck.className = 'duck';
-        duck.textContent = emoji;
-        duck.style.left = Math.random() * 100 + 'vw';
-        duck.style.animationDelay = Math.random() * 0.8 + 's';
-        duck.style.fontSize = 1.6 + Math.random() * 2.8 + 'rem';
-        overlay.appendChild(duck);
-    }
+    const useNewAnimation = Math.random() < 0.5;
 
-    window.setTimeout(() => {
-        overlay.style.display = 'none';
-        overlay.innerHTML = '';
-    }, 4200);
+    if (useNewAnimation) {
+        for (let i = 0; i < 80; i += 1) {
+            const popup = document.createElement('div');
+            popup.className = 'emojiPop';
+            popup.textContent = emoji;
+            popup.style.left = Math.random() * 92 + 'vw';
+            popup.style.top = Math.random() * 92 + 'vh';
+            popup.style.animationDelay = (Math.random() * 5.0) + 's';
+            popup.style.fontSize = 1.6 + Math.random() * 4.0 + 'rem';
+            overlay.appendChild(popup);
+        }
+
+        window.setTimeout(() => {
+            overlay.style.display = 'none';
+            overlay.innerHTML = '';
+        }, 6200);
+    } else {
+        for (let i = 0; i < 26; i += 1) {
+            const duck = document.createElement('div');
+            duck.className = 'duck';
+            duck.textContent = emoji;
+            duck.style.left = Math.random() * 100 + 'vw';
+            duck.style.animationDelay = Math.random() * 0.8 + 's';
+            duck.style.fontSize = 1.6 + Math.random() * 2.8 + 'rem';
+            overlay.appendChild(duck);
+        }
+
+        window.setTimeout(() => {
+            overlay.style.display = 'none';
+            overlay.innerHTML = '';
+        }, 4200);
+    }
 }
 
 function lockPage() {

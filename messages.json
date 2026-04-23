@@ -33,16 +33,17 @@
     "text": "Time looks better on you"
   },
   {
+    "text": "Every second suits you"
+  },
+  {
     "text": "Wear this and think of me sometimes"
   },
   {
     "text": "This watch now owns you"
   },
   {
-    "text": "Loading… responsible adult mode"
-  },
-  {
-    "text": "Proof that I think of you<3"
+    "text": "Proof that I think of you ♥",
+    "style": "special"
   },
   {
     "text": "Your wrist looks expensive now"
@@ -66,9 +67,6 @@
     "text": "This watch is emotionally attached to you"
   },
   {
-    "text": "Luxury item detected"
-  },
-  {
     "text": "Smart watch. Smarter owner."
   },
   {
@@ -78,7 +76,7 @@
   },
   {
     "text": "Coffee at _______?",
-    "actionLabel": "Yes",
+    "actionLabel": "I know a few places",
     "actionUrl": "https://wa.me/?text=Coffee%20at%20_______%3F%20%E2%98%95"
   },
   {
@@ -137,9 +135,10 @@
     "actionType": "charisma"
   },
   {
-    "text": "This feels like a coffee invitation in disguise",
+    "text": "Your impatience feels like a coffee invitation in disguise",
     "actionLabel": "Correct",
-    "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95"
+    "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95",
+    "style": "special"
   },
   {
     "text": "Miss me enough for coffee?",
