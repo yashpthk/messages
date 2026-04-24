@@ -12,7 +12,7 @@ let dramaticLines = [];
 
 let remaining = [];
 let failedAttempts = 0;
-let manualRefresh = false;
+let isRolling = false;
 
 const dataLoaded = Promise.all([
     fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }),
@@ -31,9 +31,6 @@ function getDeckMessage() {
     }
     const index = Math.floor(Math.random() * remaining.length);
     const messageData = remaining[index];
-    if (messageData.style === 'special' && !manualRefresh) {
-        return getDeckMessage();
-    }
     return remaining.splice(index, 1)[0];
 }
 
@@ -97,28 +94,27 @@ function resetActionUi() {
     const actionBtn = document.getElementById('actionBtn');
     const linkActionBtn = document.getElementById('linkActionBtn');
     const actionLink = document.getElementById('actionLink');
-    const refreshBtn = document.getElementById('refreshBtn');
+    const rerollBtn = document.getElementById('rerollBtn');
 
     actionBtn.style.display = 'none';
     actionBtn.onclick = null;
     linkActionBtn.style.display = 'none';
     actionLink.style.display = 'none';
     actionLink.href = '#';
-    refreshBtn.style.display = 'inline-block';
+    rerollBtn.style.display = 'inline-block';
 }
 
-function showMessage(messageData) {
+function showMessage(messageData, skipFade = false) {
     const el = document.getElementById('message');
     const actionBtn = document.getElementById('actionBtn');
     const linkActionBtn = document.getElementById('linkActionBtn');
     const actionLink = document.getElementById('actionLink');
-    const refreshBtn = document.getElementById('refreshBtn');
     const isObjectMessage = typeof messageData === 'object' && messageData !== null;
     const text = typeof messageData === 'string' ? messageData : messageData.text;
 
     resetActionUi();
 
-    el.style.opacity = '0';
+    if (!skipFade) el.style.opacity = '0';
     el.classList.remove('specialMessage');
     clearCardModes();
 
@@ -158,12 +154,42 @@ function showMessage(messageData) {
         }
 
         el.style.opacity = '1';
-    }, 120);
+    }, skipFade ? 0 : 120);
 }
 
-function onRefresh() {
-    manualRefresh = true;
-    showRandomMessage();
+function onReroll() {
+    if (isRolling) return;
+    
+    const btn = document.getElementById('rerollBtn');
+    if (btn) {
+        btn.classList.remove('reroll-anim');
+        void btn.offsetWidth;
+        btn.classList.add('reroll-anim');
+    }
+
+    const el = document.getElementById('message');
+    el.style.transition = 'none';
+    el.style.opacity = '1';
+    
+    isRolling = true;
+    let rolls = 0;
+    const maxRolls = 15;
+    
+    el.classList.add('slot-machine-text');
+
+    const rollInterval = setInterval(() => {
+        let interim = messages[Math.floor(Math.random() * messages.length)];
+        el.textContent = typeof interim === 'string' ? interim : interim.text;
+        
+        rolls++;
+        if (rolls >= maxRolls) {
+            clearInterval(rollInterval);
+            el.classList.remove('slot-machine-text');
+            el.style.transition = '';
+            isRolling = false;
+            showMessage(getDeckMessage(), true);
+        }
+    }, 45);
 }
 
 function showRandomMessage() {

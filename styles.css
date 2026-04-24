@@ -70,7 +70,7 @@ button {
 
 .primaryBtn:hover,
 .lockBtn:hover,
-.refreshBtn:hover {
+.rerollBtn:hover {
     background: #fff6fa;
 }
 
@@ -111,6 +111,17 @@ button {
     letter-spacing: 0.01em;
 }
 
+.slot-machine-text {
+    opacity: 0.6;
+    animation: slotScroll 0.1s linear infinite;
+}
+
+@keyframes slotScroll {
+    0% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+    100% { transform: translateY(-2px); }
+}
+
 
 
 .small {
@@ -132,7 +143,7 @@ button {
 }
 
 .lockBtn,
-.refreshBtn {
+.rerollBtn {
     width: 34px;
     height: 34px;
     padding: 0;
@@ -143,18 +154,28 @@ button {
     border-radius: 999px;
     font-size: 14px;
     line-height: 1;
+    position: absolute;
 }
 
 .lockBtn {
-    position: absolute;
     top: 14px;
     right: 14px;
 }
 
-.refreshBtn {
-    position: absolute;
-    top: 14px;
-    right: 56px;
+.rerollBtn {
+    bottom: 14px;
+    right: 14px;
+    font-size: 18px;
+}
+
+.reroll-anim {
+    animation: spinReroll 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes spinReroll {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.25); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
 .quackBtn {
@@ -168,14 +189,14 @@ button {
 .card.specialCard .hint,
 .card.specialCard .primaryBtn,
 .card.specialCard .lockBtn,
-.card.specialCard .refreshBtn {
+.card.specialCard .rerollBtn {
     color: #5f3b54;
     border-color: rgba(95, 59, 84, 0.25);
 }
 
 .card.specialCard .primaryBtn,
 .card.specialCard .lockBtn,
-.card.specialCard .refreshBtn {
+.card.specialCard .rerollBtn {
     color: #6b5612;
     border-color: rgba(107, 86, 18, 0.28);
     background: rgba(255, 245, 196, 0.55);
@@ -189,7 +210,7 @@ button {
 
 .card.specialCard .primaryBtn:hover,
 .card.specialCard .lockBtn:hover,
-.card.specialCard .refreshBtn:hover {
+.card.specialCard .rerollBtn:hover {
     background: rgba(255, 241, 173, 0.82);
 }
 
