@@ -76,7 +76,7 @@ async function checkPassword() {
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
-    card.classList.remove('specialCard', 'validationCard', 'charismaCard', 'chaosCard');
+    card.classList.remove('specialCard', 'rareCard', 'validationCard', 'charismaCard', 'chaosCard');
 }
 
 function applyCardMode(messageData) {
@@ -84,6 +84,7 @@ function applyCardMode(messageData) {
     if (!messageData || typeof messageData !== 'object') return;
 
     if (messageData.style === 'special') card.classList.add('specialCard');
+    if (messageData.style === 'rare') card.classList.add('rareCard');
 
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');
@@ -115,7 +116,7 @@ function showMessage(messageData, skipFade = false) {
     resetActionUi();
 
     if (!skipFade) el.style.opacity = '0';
-    el.classList.remove('specialMessage');
+    el.classList.remove('specialMessage', 'rareMessage');
     clearCardModes();
 
     window.setTimeout(() => {
@@ -123,6 +124,8 @@ function showMessage(messageData, skipFade = false) {
 
         if (isObjectMessage && messageData.style === 'special') {
             el.classList.add('specialMessage');
+        } else if (isObjectMessage && messageData.style === 'rare') {
+            el.classList.add('rareMessage');
         }
 
         applyCardMode(messageData);
@@ -173,7 +176,7 @@ function onReroll() {
     
     resetActionUi();
     clearCardModes();
-    el.classList.remove('specialMessage');
+    el.classList.remove('specialMessage', 'rareMessage');
     
     isRolling = true;
     let rolls = 0;
@@ -294,7 +297,7 @@ function lockPage() {
     document.getElementById('loginPage').style.display = 'block';
     document.getElementById('passwordInput').focus();
     clearCardModes();
-    document.getElementById('message').classList.remove('specialMessage');
+    document.getElementById('message').classList.remove('specialMessage', 'rareMessage');
     resetActionUi();
 }
 
