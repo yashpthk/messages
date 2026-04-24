@@ -171,6 +171,10 @@ function onReroll() {
     el.style.transition = 'none';
     el.style.opacity = '1';
     
+    resetActionUi();
+    clearCardModes();
+    el.classList.remove('specialMessage');
+    
     isRolling = true;
     let rolls = 0;
     const maxRolls = 15;
