@@ -44,6 +44,28 @@ body {
     box-shadow: 0 12px 30px rgba(88, 212, 170, 0.2);
 }
 
+.card.podcastCard {
+    border-color: #8c8cff;
+    box-shadow: 0 12px 30px rgba(140, 140, 255, 0.2);
+}
+
+.podcastBadge {
+    display: none;
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #eef2ff;
+    color: #5c6bc0;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(92, 107, 192, 0.2);
+}
+
 input {
     padding: 12px;
     width: 100%;
@@ -289,6 +311,20 @@ button {
 .card.rareCard .actionBtn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+    opacity: 1;
+}
+
+.card.podcastCard .actionBtn {
+    background: linear-gradient(135deg, #8c8cff, #5c6bc0);
+    color: white;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(140, 140, 255, 0.25);
+}
+
+.card.podcastCard .actionBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(140, 140, 255, 0.4);
     opacity: 1;
 }
 

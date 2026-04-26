@@ -385,5 +385,11 @@
     "text": "Pretending we understand what we're talking about over coffee?",
     "actionLabel": "Bold choice",
     "actionUrl": "https://wa.me/?text=Bold%20choice.%20I%20will%20pretend%20to%20understand%20over%20coffee.%20%F0%9F%8D%9F"
+  },
+  {
+    "text": "Savants: When Brilliance Drops In",
+    "actionLabel": "🎙️ Listen",
+    "actionType": "podcast",
+    "actionUrl": "https://open.spotify.com/episode/4yaRG6sis1JDjY4bCrv08s?si=MPr7_rKlT7eww9DAC5_qSQ"
   }
 ]
