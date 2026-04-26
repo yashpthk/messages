@@ -14,6 +14,10 @@ let remaining = [];
 let failedAttempts = 0;
 let isRolling = false;
 
+let lastValidation = null;
+let lastCharisma = null;
+let lastChaos = null;
+
 const dataLoaded = Promise.all([
     fetch('messages.json').then(r => r.json()).then(d => { messages = d; remaining = [...messages]; }),
     fetch('validation.json').then(r => r.json()).then(d => dramaticLines = d),
@@ -21,8 +25,16 @@ const dataLoaded = Promise.all([
     fetch('charisma.json').then(r => r.json()).then(d => charismaLines = d)
 ]).catch(e => console.error(e));
 
-function getRandomItem(items) {
-    return items[Math.floor(Math.random() * items.length)];
+function getRandomItem(items, lastItem = null) {
+    if (!items || items.length === 0) return null;
+    if (items.length === 1) return items[0];
+
+    let item;
+    do {
+        item = items[Math.floor(Math.random() * items.length)];
+    } while (item === lastItem && lastItem !== null);
+
+    return item;
 }
 
 function getDeckMessage() {
@@ -204,7 +216,9 @@ function showRandomMessage() {
 }
 
 function showDramaticValidation() {
-    document.getElementById('validationText').textContent = getRandomItem(dramaticLines);
+    const item = getRandomItem(dramaticLines, lastValidation);
+    lastValidation = item;
+    document.getElementById('validationText').textContent = item;
     document.getElementById('validationOverlay').style.display = 'flex';
 }
 
@@ -216,7 +230,9 @@ function showCharismaUnlock() {
     const fill = document.getElementById('charismaFill');
     const percent = 92 + Math.floor(Math.random() * 9);
 
-    document.getElementById('charismaText').textContent = getRandomItem(charismaLines);
+    const item = getRandomItem(charismaLines, lastCharisma);
+    lastCharisma = item;
+    document.getElementById('charismaText').textContent = item;
     document.getElementById('charismaSub').textContent = 'Charisma level: ' + percent + '%';
     document.getElementById('charismaOverlay').style.display = 'flex';
     fill.style.width = '0%';
@@ -231,7 +247,8 @@ function closeCharisma() {
 }
 
 function showChaos() {
-    const chaosItem = getRandomItem(chaosLines);
+    const chaosItem = getRandomItem(chaosLines, lastChaos);
+    lastChaos = chaosItem;
     document.getElementById('chaosText').textContent = chaosItem.text || chaosItem;
     document.getElementById('chaosSub').textContent = 'A little unnecessary chaos, as requested.';
     document.getElementById('chaosOverlay').style.display = 'flex';
