@@ -315,17 +315,23 @@ document.getElementById('passwordInput').addEventListener('keydown', (e) => {
     }
 });
 
-window.addEventListener('load', () => {
-    dataLoaded.then(() => {
-        runSmokeTests();
+const initUnlocked = localStorage.getItem(STORAGE_KEY) === 'true';
 
-        const unlocked = localStorage.getItem(STORAGE_KEY) === 'true';
-        if (unlocked) {
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('messagePage').style.display = 'block';
+if (initUnlocked) {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('messagePage').style.display = 'block';
+} else {
+    document.getElementById('loginPage').style.display = 'block';
+    document.getElementById('passwordInput').focus();
+}
+
+dataLoaded.then(() => {
+    runSmokeTests();
+
+    if (localStorage.getItem(STORAGE_KEY) === 'true') {
+        const currentMessage = document.getElementById('message').textContent;
+        if (!currentMessage) {
             showRandomMessage();
-        } else {
-            document.getElementById('passwordInput').focus();
         }
-    });
+    }
 });

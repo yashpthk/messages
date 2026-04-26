@@ -87,6 +87,7 @@ button {
     opacity: 0.92;
 }
 
+#loginPage,
 #messagePage {
     display: none;
 }
@@ -246,6 +247,7 @@ button {
     background: linear-gradient(90deg, #b38728, #fcf6ba, #bf953f, #b38728);
     background-size: 200% auto;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
     animation: goldShine 4s linear infinite;
