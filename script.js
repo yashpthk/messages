@@ -88,7 +88,9 @@ async function checkPassword() {
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
-    card.classList.remove('specialCard', 'rareCard', 'validationCard', 'charismaCard', 'chaosCard');
+    card.classList.remove('specialCard', 'rareCard', 'validationCard', 'charismaCard', 'chaosCard', 'podcastCard');
+    const badge = document.getElementById('podcastBadge');
+    if (badge) badge.style.display = 'none';
 }
 
 function applyCardMode(messageData) {
@@ -101,6 +103,11 @@ function applyCardMode(messageData) {
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');
     else if (messageData.actionType === 'chaos') card.classList.add('chaosCard');
+    else if (messageData.actionType === 'podcast') {
+        card.classList.add('podcastCard');
+        const badge = document.getElementById('podcastBadge');
+        if (badge) badge.style.display = 'inline-block';
+    }
 }
 
 function resetActionUi() {
@@ -160,6 +167,11 @@ function showMessage(messageData, skipFade = false) {
                 actionBtn.textContent = messageData.actionLabel;
                 actionBtn.style.display = 'inline-block';
                 actionBtn.onclick = showDramaticValidation;
+            } else if (messageData.actionType === 'podcast' && messageData.actionUrl) {
+                linkActionBtn.textContent = messageData.actionLabel;
+                linkActionBtn.style.display = 'inline-block';
+                actionLink.href = messageData.actionUrl;
+                actionLink.style.display = 'inline-block';
             } else if (messageData.actionUrl) {
                 linkActionBtn.textContent = messageData.actionLabel;
                 linkActionBtn.style.display = 'inline-block';
