@@ -391,5 +391,23 @@
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/episode/4yaRG6sis1JDjY4bCrv08s?si=MPr7_rKlT7eww9DAC5_qSQ"
+  },
+  {
+    "text": "Limetown (the show that got me into podcasts)",
+    "actionLabel": "🎙️ Listen",
+    "actionType": "podcast",
+    "actionUrl": "https://open.spotify.com/show/1tshi3C3cIBEj6XkyLuo6b?si=9b8ab61f4ef24c48"
+  },
+  {
+    "text": "The Anthropocene Reviewed – Auld Lang Syne",
+    "actionLabel": "🎙️ Listen",
+    "actionType": "podcast",
+    "actionUrl": "https://open.spotify.com/episode/0fyFhJxP1cRVziLGdTXFLY?si=mlrnG5dBTemIbMKun9F7Dw"
+  },
+  {
+    "text": "Endless Thread – The Great Glitter Mystery",
+    "actionLabel": "🎙️ Listen",
+    "actionType": "podcast",
+    "actionUrl": "https://open.spotify.com/episode/30k87wR3mgtNXHLB1whirs?si=J4aY-t6nQnG9jnYVLP9n_Q"
   }
 ]
