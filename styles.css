@@ -227,7 +227,6 @@ button {
     color: #8a7280;
     font-size: 0.9rem;
     font-style: italic;
-    animation: slideInOut 2s infinite ease-in-out;
 }
 
 @keyframes slideInOut {
@@ -237,6 +236,7 @@ button {
 
 .card.introCard .reroll-hint {
     display: block;
+    animation: slideInOut 2s infinite ease-in-out;
 }
 
 .reroll-anim {
