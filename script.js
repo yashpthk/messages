@@ -3,7 +3,12 @@ let charismaLines = [];
 let chaosLines = [];
 
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
-const FIRST_UNLOCK_MESSAGE = 'Happy Birthday! ';
+const FIRST_UNLOCK_MESSAGE = {
+    text: 'Happy Birthday!',
+    style: 'special',
+    actionLabel: 'Celebrate!',
+    "actionUrl": "https://wa.me/491717585049?text=Lets%20celebrate."
+};
 const STORAGE_KEY = 'messagesUnlocked';
 
 let messages = [];
@@ -186,7 +191,7 @@ function showMessage(messageData, skipFade = false) {
 
 function onReroll() {
     if (isRolling) return;
-    
+
     const btn = document.getElementById('rerollBtn');
     if (btn) {
         btn.classList.remove('reroll-anim');
@@ -197,21 +202,21 @@ function onReroll() {
     const el = document.getElementById('message');
     el.style.transition = 'none';
     el.style.opacity = '1';
-    
+
     resetActionUi();
     clearCardModes();
     el.classList.remove('specialMessage', 'rareMessage');
-    
+
     isRolling = true;
     let rolls = 0;
     const maxRolls = 15;
-    
+
     el.classList.add('slot-machine-text');
 
     const rollInterval = setInterval(() => {
         let interim = messages[Math.floor(Math.random() * messages.length)];
         el.textContent = typeof interim === 'string' ? interim : interim.text;
-        
+
         rolls++;
         if (rolls >= maxRolls) {
             clearInterval(rollInterval);
