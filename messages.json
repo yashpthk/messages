@@ -60,9 +60,9 @@
     "style": "rare"
   },
   {
-    "text": "Coffee at Crave?",
-    "actionLabel": "Is that even a question?",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Crave%3F%20%E2%98%95"
+  "text": "Craving a good time at Crave?",
+  "actionLabel": "Absolutely",
+  "actionUrl": "https://wa.me/491717585049?text=Crave%20soon%3F%20I%20feel%20like%20this%20is%20a%20good%20idea%20%E2%98%95"
   },
   {
     "text": "Coffee at Treppe?",
@@ -409,5 +409,16 @@
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/episode/30k87wR3mgtNXHLB1whirs?si=J4aY-t6nQnG9jnYVLP9n_Q"
+  },
+  {
+  "text": "Zeit für Brot and a slow start to the day?",
+  "actionLabel": "That sounds nice",
+  "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
+  },
+{
+  "text": "Zeit für Brot and a slow start to the day?",
+  "actionLabel": "That sounds nice",
+  "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
   }
+
 ]
