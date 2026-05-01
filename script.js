@@ -10,8 +10,8 @@ const FIRST_UNLOCK_MESSAGE = {
     actionLabel: 'Celebrate!'
 };
 const SECOND_STATIC_MESSAGE = {
-    text: 'The idea of this website is to provide you with random messages of varying styles to brighten your day.',
-    style: 'normal'
+    text: 'A curated mix of thoughts, distractions, and occasional upgrades.\nSome are rarer than others.',
+    style: 'intro'
 };
 const STORAGE_KEY = 'messagesUnlocked';
 
@@ -97,7 +97,7 @@ async function checkPassword() {
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
-    card.classList.remove('specialCard', 'rareCard', 'celebratoryCard', 'validationCard', 'charismaCard', 'chaosCard', 'podcastCard');
+    card.classList.remove('specialCard', 'rareCard', 'celebratoryCard', 'introCard', 'validationCard', 'charismaCard', 'chaosCard', 'podcastCard');
     const badge = document.getElementById('podcastBadge');
     if (badge) badge.style.display = 'none';
 }
@@ -109,6 +109,7 @@ function applyCardMode(messageData) {
     if (messageData.style === 'special') card.classList.add('specialCard');
     if (messageData.style === 'rare') card.classList.add('rareCard');
     if (messageData.style === 'celebratory') card.classList.add('celebratoryCard');
+    if (messageData.style === 'intro') card.classList.add('introCard');
 
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');

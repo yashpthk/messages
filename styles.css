@@ -131,6 +131,7 @@ button {
     margin: 24px 0;
     opacity: 0;
     transition: opacity 0.4s ease;
+    white-space: pre-wrap;
 }
 
 #message.specialMessage {
@@ -218,6 +219,26 @@ button {
     font-size: 18px;
 }
 
+.reroll-hint {
+    display: none;
+    position: absolute;
+    bottom: 22px;
+    right: 56px;
+    color: #8a7280;
+    font-size: 0.9rem;
+    font-style: italic;
+    animation: slideInOut 2s infinite ease-in-out;
+}
+
+@keyframes slideInOut {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+}
+
+.card.introCard .reroll-hint {
+    display: block;
+}
+
 .reroll-anim {
     animation: spinReroll 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -292,11 +313,14 @@ button {
     opacity: 1;
 }
 
-.card.celebratoryCard .lockBtn,
-.card.celebratoryCard .rerollBtn {
+.card.celebratoryCard .lockBtn {
     color: #ff4757;
     border-color: rgba(255, 71, 87, 0.3);
     background: rgba(255, 255, 255, 0.5);
+}
+
+.card.celebratoryCard .rerollBtn {
+    display: none !important;
 }
 
 .card.celebratoryCard .lockBtn:hover,
