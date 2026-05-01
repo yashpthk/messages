@@ -5,9 +5,13 @@ let chaosLines = [];
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
 const FIRST_UNLOCK_MESSAGE = {
     text: 'Happy Birthday!',
-    style: 'special',
-    actionLabel: 'Celebrate!',
-    "actionUrl": "https://wa.me/491717585049?text=Lets%20celebrate."
+    style: 'celebratory',
+    actionType: 'explain',
+    actionLabel: 'Celebrate!'
+};
+const SECOND_STATIC_MESSAGE = {
+    text: 'The idea of this website is to provide you with random messages of varying styles to brighten your day.',
+    style: 'normal'
 };
 const STORAGE_KEY = 'messagesUnlocked';
 
@@ -93,7 +97,7 @@ async function checkPassword() {
 
 function clearCardModes() {
     const card = document.getElementById('mainCard');
-    card.classList.remove('specialCard', 'rareCard', 'validationCard', 'charismaCard', 'chaosCard', 'podcastCard');
+    card.classList.remove('specialCard', 'rareCard', 'celebratoryCard', 'validationCard', 'charismaCard', 'chaosCard', 'podcastCard');
     const badge = document.getElementById('podcastBadge');
     if (badge) badge.style.display = 'none';
 }
@@ -104,6 +108,7 @@ function applyCardMode(messageData) {
 
     if (messageData.style === 'special') card.classList.add('specialCard');
     if (messageData.style === 'rare') card.classList.add('rareCard');
+    if (messageData.style === 'celebratory') card.classList.add('celebratoryCard');
 
     if (messageData.actionType === 'validation') card.classList.add('validationCard');
     else if (messageData.actionType === 'charisma') card.classList.add('charismaCard');
@@ -140,7 +145,7 @@ function showMessage(messageData, skipFade = false) {
     resetActionUi();
 
     if (!skipFade) el.style.opacity = '0';
-    el.classList.remove('specialMessage', 'rareMessage');
+    el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
     window.setTimeout(() => {
@@ -150,6 +155,8 @@ function showMessage(messageData, skipFade = false) {
             el.classList.add('specialMessage');
         } else if (isObjectMessage && messageData.style === 'rare') {
             el.classList.add('rareMessage');
+        } else if (isObjectMessage && messageData.style === 'celebratory') {
+            el.classList.add('celebratoryMessage');
         }
 
         applyCardMode(messageData);
@@ -160,6 +167,10 @@ function showMessage(messageData, skipFade = false) {
                 actionBtn.textContent = messageData.actionLabel;
                 actionBtn.style.display = 'inline-block';
                 actionBtn.onclick = quackForAnotherOne;
+            } else if (messageData.actionType === 'explain') {
+                actionBtn.textContent = messageData.actionLabel;
+                actionBtn.style.display = 'inline-block';
+                actionBtn.onclick = () => onReroll(SECOND_STATIC_MESSAGE);
             } else if (messageData.actionType === 'charisma') {
                 actionBtn.textContent = messageData.actionLabel;
                 actionBtn.style.display = 'inline-block';
@@ -189,7 +200,7 @@ function showMessage(messageData, skipFade = false) {
     }, skipFade ? 0 : 120);
 }
 
-function onReroll() {
+function onReroll(targetMessage = null) {
     if (isRolling) return;
 
     const btn = document.getElementById('rerollBtn');
@@ -205,7 +216,7 @@ function onReroll() {
 
     resetActionUi();
     clearCardModes();
-    el.classList.remove('specialMessage', 'rareMessage');
+    el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
 
     isRolling = true;
     let rolls = 0;
@@ -223,7 +234,12 @@ function onReroll() {
             el.classList.remove('slot-machine-text');
             el.style.transition = '';
             isRolling = false;
-            showMessage(getDeckMessage(), true);
+
+            if (targetMessage && targetMessage.text) {
+                showMessage(targetMessage, true);
+            } else {
+                showMessage(getDeckMessage(), true);
+            }
         }
     }, 45);
 }
@@ -331,7 +347,7 @@ function lockPage() {
     document.getElementById('loginPage').style.display = 'block';
     document.getElementById('passwordInput').focus();
     clearCardModes();
-    document.getElementById('message').classList.remove('specialMessage', 'rareMessage');
+    document.getElementById('message').classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     resetActionUi();
 }
 

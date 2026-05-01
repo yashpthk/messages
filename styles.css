@@ -29,6 +29,12 @@ body {
     box-shadow: 0 12px 30px rgba(246, 141, 213, 0.22);
 }
 
+.card.celebratoryCard {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    box-shadow: 0 12px 30px rgba(255, 154, 158, 0.3);
+    border-color: #ffb8c6;
+}
+
 .card.validationCard {
     border-color: #d7b4ff;
     box-shadow: 0 12px 30px rgba(181, 135, 255, 0.18);
@@ -132,6 +138,19 @@ button {
     font-style: italic;
     font-size: 1.65rem;
     letter-spacing: 0.01em;
+}
+
+#message.celebratoryMessage {
+    color: #d11a2a;
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
 }
 
 .slot-machine-text {
@@ -256,6 +275,33 @@ button {
 .card.specialCard .actionBtn:hover {
     opacity: 1;
     background: #ecc54a;
+}
+
+.card.celebratoryCard .actionBtn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+.card.celebratoryCard .actionBtn:hover {
+    background: #ff6b81;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+    opacity: 1;
+}
+
+.card.celebratoryCard .lockBtn,
+.card.celebratoryCard .rerollBtn {
+    color: #ff4757;
+    border-color: rgba(255, 71, 87, 0.3);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.card.celebratoryCard .lockBtn:hover,
+.card.celebratoryCard .rerollBtn:hover {
+    background: rgba(255, 255, 255, 0.8);
 }
 
 /* --- RARE CARD STYLES --- */
