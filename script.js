@@ -10,7 +10,7 @@ const FIRST_UNLOCK_MESSAGE = {
     actionLabel: 'Celebrate!'
 };
 const SECOND_STATIC_MESSAGE = {
-    text: 'A curated mix of thoughts, distractions, and occasional upgrades.\nSome are rarer than others.',
+    text: 'This is a curated mix of thoughts, distractions, and occasional chaos.\nSome cards are rarer than others.',
     style: 'intro'
 };
 const STORAGE_KEY = 'messagesUnlocked';

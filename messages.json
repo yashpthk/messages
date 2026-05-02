@@ -60,9 +60,9 @@
     "style": "rare"
   },
   {
-  "text": "Craving a good time at Crave?",
-  "actionLabel": "Absolutely",
-  "actionUrl": "https://wa.me/491717585049?text=Crave%20soon%3F%20I%20feel%20like%20this%20is%20a%20good%20idea%20%E2%98%95"
+    "text": "Craving a good time at Crave?",
+    "actionLabel": "Absolutely",
+    "actionUrl": "https://wa.me/491717585049?text=Crave%20soon%3F%20I%20feel%20like%20this%20is%20a%20good%20idea%20%E2%98%95"
   },
   {
     "text": "Coffee at Treppe?",
@@ -411,14 +411,49 @@
     "actionUrl": "https://open.spotify.com/episode/30k87wR3mgtNXHLB1whirs?si=J4aY-t6nQnG9jnYVLP9n_Q"
   },
   {
-  "text": "Zeit für Brot and a slow start to the day?",
-  "actionLabel": "That sounds nice",
-  "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
+    "text": "Maybe a build a cat instead?",
+    "actionLabel": " 🐾 Show me",
+    "actionUrl": "https://uchinoko-maker.jp/?lang=en-US",
+    "actionType": "podcast"
   },
-{
-  "text": "Zeit für Brot and a slow start to the day?",
-  "actionLabel": "That sounds nice",
-  "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
+  {
+    "text": "Maybe design your ideal cold coffee?",
+    "actionLabel": "🧪 For science",
+    "actionUrl": "https://makeyourselfacoldcoffee.lovable.app/makeyourselfacoldcoffee",
+    "actionType": "podcast"
+  },
+  {
+    "text": "Trust in Deutsche Bahn. Or don’t.",
+    "actionLabel": "I'm curious",
+    "actionUrl": "https://bahn.bet/",
+    "actionType": "podcast"
+  },
+  {
+    "text": "Maybe a build a cat instead?",
+    "actionLabel": " 🐾 Show me",
+    "actionUrl": "https://uchinoko-maker.jp/?lang=en-US",
+    "actionType": "podcast"
+  },
+  {
+    "text": "Maybe design your ideal cold coffee?",
+    "actionLabel": "🧪 For science",
+    "actionUrl": "https://makeyourselfacoldcoffee.lovable.app/makeyourselfacoldcoffee",
+    "actionType": "podcast"
+  },
+  {
+    "text": "Trust in Deutsche Bahn. Or don’t.",
+    "actionLabel": "I'm curious",
+    "actionUrl": "https://bahn.bet/",
+    "actionType": "podcast"
+  },
+  {
+    "text": "Zeit für Brot and a slow start to the day?",
+    "actionLabel": "That sounds nice",
+    "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
+  },
+  {
+    "text": "Zeit für Brot and a slow start to the day?",
+    "actionLabel": "That sounds nice",
+    "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8"
   }
-
 ]
