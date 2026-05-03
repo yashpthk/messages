@@ -160,7 +160,7 @@ function showMessage(messageData, skipFade = false) {
     clearCardModes();
 
     const isSpecialFirstMessage = messageData === FIRST_UNLOCK_MESSAGE || messageData === SECOND_STATIC_MESSAGE;
-    if (text && !isSpecialFirstMessage) {
+    if (text) {
         const isDuplicate = messageHistory.some(item => {
             const itemText = typeof item === 'string' ? item : item.text;
             return itemText === text;

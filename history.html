@@ -24,6 +24,7 @@
     <div class="history-page-wrapper">
         <div class="history-header">
             <h1>History</h1>
+            <input type="text" id="searchInput" placeholder="Search..." style="max-width: 200px; margin-top: 0; margin-left: auto; margin-right: 16px;">
             <button class="primaryBtn" type="button" onclick="window.location.href='index.html';" style="margin-top: 0;">Back to Café</button>
         </div>
         <div class="history-container" id="historyGrid">
@@ -56,6 +57,7 @@
 
                 const cardDiv = document.createElement('div');
                 cardDiv.className = 'card';
+                cardDiv.dataset.text = text.toLowerCase();
 
                 const msgP = document.createElement('p');
                 msgP.className = 'message';
@@ -88,6 +90,19 @@
 
                 cardDiv.appendChild(msgP);
                 grid.appendChild(cardDiv);
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const cards = grid.querySelectorAll('.card');
+                cards.forEach(card => {
+                    if (card.dataset.text.includes(query)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
     </script>
