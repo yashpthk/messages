@@ -10,6 +10,14 @@
             align-items: flex-start;
             padding-top: 48px;
         }
+        .history-container .card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .history-container .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
     </style>
 </head>
 <body>
@@ -72,6 +80,11 @@
                     else if (item.actionType === 'chaos') cardDiv.classList.add('chaosCard');
                     else if (item.actionType === 'podcast') cardDiv.classList.add('podcastCard');
                 }
+
+                cardDiv.onclick = () => {
+                    localStorage.setItem('selectedHistoryCard', JSON.stringify(item));
+                    window.location.href = 'index.html';
+                };
 
                 cardDiv.appendChild(msgP);
                 grid.appendChild(cardDiv);

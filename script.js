@@ -159,7 +159,8 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
-    if (text) {
+    const isSpecialFirstMessage = messageData === FIRST_UNLOCK_MESSAGE || messageData === SECOND_STATIC_MESSAGE;
+    if (text && !isSpecialFirstMessage) {
         const isDuplicate = messageHistory.some(item => {
             const itemText = typeof item === 'string' ? item : item.text;
             return itemText === text;
@@ -171,7 +172,7 @@ function showMessage(messageData, skipFade = false) {
     }
     const histBtn = document.getElementById('historyBtn');
     if (histBtn) {
-        if (messageHistory.length > 0) {
+        if (messageHistory.length > 0 && !isSpecialFirstMessage) {
             histBtn.style.display = 'block';
         } else {
             histBtn.style.display = 'none';
@@ -413,9 +414,21 @@ dataLoaded.then(() => {
     runSmokeTests();
 
     if (localStorage.getItem(STORAGE_KEY) === 'true') {
-        const currentMessage = document.getElementById('message').textContent;
-        if (!currentMessage) {
-            showRandomMessage();
+        const selectedHistory = localStorage.getItem('selectedHistoryCard');
+        if (selectedHistory) {
+            try {
+                const parsedCard = JSON.parse(selectedHistory);
+                localStorage.removeItem('selectedHistoryCard');
+                showMessage(parsedCard);
+            } catch (e) {
+                console.error("Failed to parse selected history card", e);
+                showRandomMessage();
+            }
+        } else {
+            const currentMessage = document.getElementById('message').textContent;
+            if (!currentMessage) {
+                showRandomMessage();
+            }
         }
     }
 });
