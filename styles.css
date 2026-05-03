@@ -120,32 +120,41 @@ button {
     display: none;
 }
 
-#historyPage {
-    display: none;
-    text-align: left;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-#historyList {
-    margin-top: 16px;
-    margin-bottom: 16px;
+.history-page-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    width: 100%;
+    max-width: 1200px;
 }
 
-.historyItem {
-    background: #fdfdfd;
-    border: 1px solid #ead6df;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1rem;
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.history-header h1 {
+    margin: 0;
     color: #2f2430;
-    white-space: pre-wrap;
 }
 
-#message {
+.history-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.history-container .card {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#message, .message {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,19 +163,22 @@ button {
     font-size: 1.8rem;
     line-height: 1.5;
     margin: 24px 0;
-    opacity: 0;
+    opacity: 1; /* override original #message opacity 0 */
     transition: opacity 0.4s ease;
     white-space: pre-wrap;
 }
+#message {
+    opacity: 0;
+}
 
-#message.specialMessage {
+#message.specialMessage, .message.specialMessage {
     color: #5f3b54;
     font-style: italic;
     font-size: 1.65rem;
     letter-spacing: 0.01em;
 }
 
-#message.celebratoryMessage {
+#message.celebratoryMessage, .message.celebratoryMessage {
     color: #d11a2a;
     font-weight: bold;
     font-size: 2rem;
@@ -360,7 +372,7 @@ button {
     border-color: #d4af37;
 }
 
-#message.rareMessage {
+#message.rareMessage, .message.rareMessage {
     background: linear-gradient(90deg, #b38728, #fcf6ba, #bf953f, #b38728);
     background-size: 200% auto;
     -webkit-background-clip: text;

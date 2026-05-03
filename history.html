@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ History</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            align-items: flex-start;
+            padding-top: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="history-page-wrapper">
+        <div class="history-header">
+            <h1>History</h1>
+            <button class="primaryBtn" type="button" onclick="window.location.href='index.html';" style="margin-top: 0;">Back to Café</button>
+        </div>
+        <div class="history-container" id="historyGrid">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('historyGrid');
+            let historyData = [];
+
+            try {
+                const storedHistory = localStorage.getItem('cardHistory');
+                if (storedHistory) {
+                    historyData = JSON.parse(storedHistory);
+                }
+            } catch(e) {
+                console.error('Failed to load history', e);
+            }
+
+            if (historyData.length === 0) {
+                grid.innerHTML = '<p style="color: #8a7280; text-align: center; grid-column: 1 / -1;">No history yet. Start exploring!</p>';
+                return;
+            }
+
+            historyData.forEach(item => {
+                const isObjectMessage = typeof item === 'object' && item !== null;
+                const text = isObjectMessage ? item.text : item;
+
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card';
+
+                const msgP = document.createElement('p');
+                msgP.className = 'message';
+                msgP.textContent = text;
+
+                if (isObjectMessage) {
+                    if (item.style === 'special') {
+                        cardDiv.classList.add('specialCard');
+                        msgP.classList.add('specialMessage');
+                    } else if (item.style === 'rare') {
+                        cardDiv.classList.add('rareCard');
+                        msgP.classList.add('rareMessage');
+                    } else if (item.style === 'celebratory') {
+                        cardDiv.classList.add('celebratoryCard');
+                        msgP.classList.add('celebratoryMessage');
+                    } else if (item.style === 'intro') {
+                        cardDiv.classList.add('introCard');
+                    }
+
+                    if (item.actionType === 'validation') cardDiv.classList.add('validationCard');
+                    else if (item.actionType === 'charisma') cardDiv.classList.add('charismaCard');
+                    else if (item.actionType === 'chaos') cardDiv.classList.add('chaosCard');
+                    else if (item.actionType === 'podcast') cardDiv.classList.add('podcastCard');
+                }
+
+                cardDiv.appendChild(msgP);
+                grid.appendChild(cardDiv);
+            });
+        });
+    </script>
+</body>
+</html>

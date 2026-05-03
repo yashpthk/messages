@@ -18,6 +18,15 @@ const STORAGE_KEY = 'messagesUnlocked';
 let messages = [];
 let messageHistory = [];
 
+try {
+    const storedHistory = localStorage.getItem('cardHistory');
+    if (storedHistory) {
+        messageHistory = JSON.parse(storedHistory);
+    }
+} catch(e) {
+    console.error('Could not load history from local storage', e);
+}
+
 let dramaticLines = [];
 
 let remaining = [];
@@ -150,8 +159,15 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
-    if (text && !messageHistory.includes(text)) {
-        messageHistory.push(text);
+    if (text) {
+        const isDuplicate = messageHistory.some(item => {
+            const itemText = typeof item === 'string' ? item : item.text;
+            return itemText === text;
+        });
+        if (!isDuplicate) {
+            messageHistory.push(messageData);
+            localStorage.setItem('cardHistory', JSON.stringify(messageHistory));
+        }
     }
     const histBtn = document.getElementById('historyBtn');
     if (histBtn) {
@@ -262,25 +278,6 @@ function showRandomMessage() {
     showMessage(getDeckMessage());
 }
 
-function showHistory() {
-    document.getElementById('messagePage').style.display = 'none';
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('historyPage').style.display = 'block';
-
-    const list = document.getElementById('historyList');
-    list.innerHTML = '';
-    messageHistory.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'historyItem';
-        div.textContent = item;
-        list.appendChild(div);
-    });
-}
-
-function closeHistory() {
-    document.getElementById('historyPage').style.display = 'none';
-    document.getElementById('messagePage').style.display = 'block';
-}
 
 function showDramaticValidation() {
     const item = getRandomItem(dramaticLines, lastValidation);
@@ -373,10 +370,10 @@ function fillScreenWithEmoji(emoji) {
 
 function lockPage() {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('cardHistory');
     failedAttempts = 0;
     messageHistory = [];
     document.getElementById('historyBtn').style.display = 'none';
-    document.getElementById('historyPage').style.display = 'none';
     document.getElementById('hint').innerHTML = '';
     document.getElementById('error').textContent = '';
     document.getElementById('passwordInput').value = '';

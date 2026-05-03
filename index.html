@@ -32,14 +32,8 @@
 
             <div id="rerollHint" class="reroll-hint">Reroll ➔</div>
             <button id="rerollBtn" class="rerollBtn" type="button" onclick="onReroll()">🎲</button>
-            <button id="historyBtn" class="lockBtn" type="button" onclick="showHistory()" style="display:none; right: 56px;">📜</button>
+            <button id="historyBtn" class="lockBtn" type="button" onclick="window.location.href='history.html';" style="display:none; right: 56px;">📜</button>
             <button class="lockBtn" type="button" onclick="lockPage()">🔒</button>
-        </div>
-
-        <div id="historyPage" style="display:none;">
-            <h2>History</h2>
-            <div id="historyList"></div>
-            <button class="primaryBtn" type="button" onclick="closeHistory()">Back</button>
         </div>
     </div>
 
