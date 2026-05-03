@@ -1,9 +1,30 @@
 [
-  "You do more invisible work than most people will ever notice.",
-  "People trust you for a reason.",
-  "There is something quietly remarkable about you.",
-  "Some people create noise. You create stability.",
-  "You are sharper than your self-doubt would like you to believe.",
-  "The way you handle stress says more about you than the stress itself.",
-  "You have a way of fixing things that other people miss."
+  {
+    "text": "You do more invisible work than most people will ever notice.",
+    "id": 93
+  },
+  {
+    "text": "People trust you for a reason.",
+    "id": 94
+  },
+  {
+    "text": "There is something quietly remarkable about you.",
+    "id": 95
+  },
+  {
+    "text": "Some people create noise. You create stability.",
+    "id": 96
+  },
+  {
+    "text": "You are sharper than your self-doubt would like you to believe.",
+    "id": 97
+  },
+  {
+    "text": "The way you handle stress says more about you than the stress itself.",
+    "id": 98
+  },
+  {
+    "text": "You have a way of fixing things that other people miss.",
+    "id": 99
+  }
 ]

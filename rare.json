@@ -1,20 +1,24 @@
 [
   {
     "text": "Rare drop: you have been especially thought of.",
-    "style": "rare"
+    "style": "rare",
+    "id": 124
   },
   {
     "text": "This card appears only for favorites.",
-    "style": "rare"
+    "style": "rare",
+    "id": 125
   },
   {
     "text": "A rare message, because subtlety has limits.",
-    "style": "rare"
+    "style": "rare",
+    "id": 126
   },
   {
     "text": "This feels like a coffee invitation in disguise",
     "actionLabel": "Correct",
     "actionUrl": "https://wa.me/?text=This%20was%20absolutely%20a%20coffee%20invitation.%20%E2%98%95",
-    "style": "rare"
+    "style": "rare",
+    "id": 127
   }
 ]

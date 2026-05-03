@@ -4,12 +4,14 @@ let chaosLines = [];
 
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
 const FIRST_UNLOCK_MESSAGE = {
+    id: -1,
     text: 'Happy Birthday!',
     style: 'celebratory',
     actionType: 'explain',
     actionLabel: 'Celebrate!'
 };
 const SECOND_STATIC_MESSAGE = {
+    id: -2,
     text: 'This is a curated mix of thoughts, distractions, and occasional chaos.\nSome cards are rarer than others.',
     style: 'intro'
 };
@@ -173,11 +175,11 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
-    const isSpecialFirstMessage = text === FIRST_UNLOCK_MESSAGE.text || text === SECOND_STATIC_MESSAGE.text;
-    if (text) {
+    const messageId = typeof messageData === 'object' && messageData !== null ? messageData.id : undefined;
+    const isSpecialFirstMessage = messageId === FIRST_UNLOCK_MESSAGE.id || messageId === SECOND_STATIC_MESSAGE.id;
+    if (messageId !== undefined) {
         const isDuplicate = messageHistory.some(item => {
-            const itemText = typeof item === 'string' ? item : item.text;
-            return itemText === text;
+            return (typeof item === 'object' && item !== null ? item.id : undefined) === messageId;
         });
         if (!isDuplicate) {
             messageHistory.push(messageData);
@@ -299,7 +301,7 @@ function showRandomMessage() {
 function showDramaticValidation() {
     const item = getRandomItem(dramaticLines, lastValidation);
     lastValidation = item;
-    document.getElementById('validationText').textContent = item;
+    document.getElementById('validationText').textContent = typeof item === 'object' ? item.text : item;
     document.getElementById('validationOverlay').style.display = 'flex';
 }
 
@@ -313,7 +315,7 @@ function showCharismaUnlock() {
 
     const item = getRandomItem(charismaLines, lastCharisma);
     lastCharisma = item;
-    document.getElementById('charismaText').textContent = item;
+    document.getElementById('charismaText').textContent = typeof item === 'object' ? item.text : item;
     document.getElementById('charismaSub').textContent = 'Charisma level: ' + percent + '%';
     document.getElementById('charismaOverlay').style.display = 'flex';
     fill.style.width = '0%';

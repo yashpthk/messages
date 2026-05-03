@@ -1,30 +1,37 @@
 [
   {
     "text": "You are now legally iconic.",
-    "emoji": "🪩"
+    "emoji": "🪩",
+    "id": 100
   },
   {
     "text": "Mood upgraded through irresponsible means.",
-    "emoji": "✨"
+    "emoji": "✨",
+    "id": 101
   },
   {
     "text": "A small amount of chaos has been professionally applied.",
-    "emoji": "🌪️"
+    "emoji": "🌪️",
+    "id": 102
   },
   {
     "text": "This was not necessary. That is why it worked.",
-    "emoji": "🎉"
+    "emoji": "🎉",
+    "id": 103
   },
   {
     "text": "A cat has entered the system.",
-    "emoji": "🐈"
+    "emoji": "🐈",
+    "id": 104
   },
   {
     "text": "This watch now owns you",
-    "emoji": "👑"
+    "emoji": "👑",
+    "id": 105
   },
   {
     "text": "Your vibes are now operating without supervision.",
-    "emoji": "⚡"
+    "emoji": "⚡",
+    "id": 106
   }
 ]
