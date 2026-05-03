@@ -16,6 +16,7 @@ const SECOND_STATIC_MESSAGE = {
 const STORAGE_KEY = 'messagesUnlocked';
 
 let messages = [];
+let messageHistory = [];
 
 let dramaticLines = [];
 
@@ -149,6 +150,18 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
+    if (text && !messageHistory.includes(text)) {
+        messageHistory.push(text);
+    }
+    const histBtn = document.getElementById('historyBtn');
+    if (histBtn) {
+        if (messageHistory.length > 0) {
+            histBtn.style.display = 'block';
+        } else {
+            histBtn.style.display = 'none';
+        }
+    }
+
     window.setTimeout(() => {
         el.textContent = text;
 
@@ -249,6 +262,26 @@ function showRandomMessage() {
     showMessage(getDeckMessage());
 }
 
+function showHistory() {
+    document.getElementById('messagePage').style.display = 'none';
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('historyPage').style.display = 'block';
+
+    const list = document.getElementById('historyList');
+    list.innerHTML = '';
+    messageHistory.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'historyItem';
+        div.textContent = item;
+        list.appendChild(div);
+    });
+}
+
+function closeHistory() {
+    document.getElementById('historyPage').style.display = 'none';
+    document.getElementById('messagePage').style.display = 'block';
+}
+
 function showDramaticValidation() {
     const item = getRandomItem(dramaticLines, lastValidation);
     lastValidation = item;
@@ -341,6 +374,9 @@ function fillScreenWithEmoji(emoji) {
 function lockPage() {
     localStorage.removeItem(STORAGE_KEY);
     failedAttempts = 0;
+    messageHistory = [];
+    document.getElementById('historyBtn').style.display = 'none';
+    document.getElementById('historyPage').style.display = 'none';
     document.getElementById('hint').innerHTML = '';
     document.getElementById('error').textContent = '';
     document.getElementById('passwordInput').value = '';

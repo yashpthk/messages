@@ -120,6 +120,31 @@ button {
     display: none;
 }
 
+#historyPage {
+    display: none;
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#historyList {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.historyItem {
+    background: #fdfdfd;
+    border: 1px solid #ead6df;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2f2430;
+    white-space: pre-wrap;
+}
+
 #message {
     display: flex;
     align-items: center;
