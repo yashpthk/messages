@@ -22,8 +22,9 @@
 </head>
 <body>
     <div class="history-page-wrapper">
-        <div class="search-container">
+        <div class="search-container" style="align-items: center;">
             <input type="text" id="searchInput" placeholder="Search found history...">
+            <span id="historyStats" style="margin-left: 16px; color: #8a7280; font-size: 0.9rem; white-space: nowrap;"></span>
         </div>
         <div class="history-container" id="historyGrid">
             <!-- Cards will be dynamically inserted here -->
@@ -43,6 +44,10 @@
             } catch(e) {
                 console.error('Failed to load history', e);
             }
+
+            const totalCards = localStorage.getItem('totalCards') || '?';
+            const statsSpan = document.getElementById('historyStats');
+            statsSpan.textContent = `Found ${historyData.length} of ${totalCards} cards`;
 
             if (historyData.length === 0) {
                 grid.innerHTML = '<p style="color: #8a7280; text-align: center; grid-column: 1 / -1;">No history yet. Start exploring!</p>';
