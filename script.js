@@ -57,12 +57,26 @@ function getRandomItem(items, lastItem = null) {
 }
 
 function getDeckMessage() {
-    if (remaining.length === 0) {
-        remaining = [...messages];
+    let validRemaining = remaining;
+
+    if (messageHistory.length < 20) {
+        validRemaining = remaining.filter(m => (typeof m === 'string' || m.style !== 'rare'));
     }
-    const index = Math.floor(Math.random() * remaining.length);
-    const messageData = remaining[index];
-    return remaining.splice(index, 1)[0];
+
+    if (validRemaining.length === 0) {
+        remaining = [...messages];
+        validRemaining = messageHistory.length < 20 ? remaining.filter(m => (typeof m === 'string' || m.style !== 'rare')) : remaining;
+    }
+
+    const validIndex = Math.floor(Math.random() * validRemaining.length);
+    const messageData = validRemaining[validIndex];
+
+    const originalIndex = remaining.indexOf(messageData);
+    if (originalIndex !== -1) {
+        remaining.splice(originalIndex, 1);
+    }
+
+    return messageData;
 }
 
 async function sha256(text) {
@@ -255,8 +269,10 @@ function onReroll(targetMessage = null) {
 
     el.classList.add('slot-machine-text');
 
+    const validMessages = messageHistory.length < 20 ? messages.filter(m => (typeof m === 'string' || m.style !== 'rare')) : messages;
+
     const rollInterval = setInterval(() => {
-        let interim = messages[Math.floor(Math.random() * messages.length)];
+        let interim = validMessages[Math.floor(Math.random() * validMessages.length)];
         el.textContent = typeof interim === 'string' ? interim : interim.text;
 
         rolls++;
