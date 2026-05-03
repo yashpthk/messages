@@ -159,7 +159,7 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
-    const isSpecialFirstMessage = messageData === FIRST_UNLOCK_MESSAGE || messageData === SECOND_STATIC_MESSAGE;
+    const isSpecialFirstMessage = text === FIRST_UNLOCK_MESSAGE.text || text === SECOND_STATIC_MESSAGE.text;
     if (text) {
         const isDuplicate = messageHistory.some(item => {
             const itemText = typeof item === 'string' ? item : item.text;

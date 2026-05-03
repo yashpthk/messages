@@ -127,16 +127,31 @@ button {
     max-width: 1200px;
 }
 
-.history-header {
+.search-container {
+    width: 100%;
+    margin-bottom: 36px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+    justify-content: center;
 }
 
-.history-header h1 {
-    margin: 0;
+.search-container input {
+    border: none;
+    border-bottom: 1px solid #d9c7d0;
+    border-radius: 0;
+    background: transparent;
+    padding: 12px 8px;
+    font-size: 1.2rem;
     color: #2f2430;
+    outline: none;
+    max-width: 600px;
+    width: 100%;
+    font-family: inherit;
+    text-align: center;
+    transition: border-color 0.25s ease;
+}
+
+.search-container input:focus {
+    border-bottom-color: #8a7280;
 }
 
 .history-container {
