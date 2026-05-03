@@ -387,9 +387,7 @@ function fillScreenWithEmoji(emoji) {
 
 function lockPage() {
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem('cardHistory');
     failedAttempts = 0;
-    messageHistory = [];
     document.getElementById('historyBtn').style.display = 'none';
     document.getElementById('hint').innerHTML = '';
     document.getElementById('error').textContent = '';
