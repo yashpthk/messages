@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,21 +11,25 @@
             align-items: flex-start;
             padding-top: 48px;
         }
+
         .history-container .card {
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
         .history-container .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
         }
     </style>
 </head>
+
 <body>
     <div class="history-page-wrapper">
         <div class="search-container" style="align-items: center;">
             <input type="text" id="searchInput" placeholder="Search found history...">
-            <span id="historyStats" style="margin-left: 16px; color: #8a7280; font-size: 0.9rem; white-space: nowrap;"></span>
+            <span id="historyStats"
+                style="margin-left: auto; color: #8a7280; font-size: 0.9rem; white-space: nowrap; display: flex; flex-direction: column; text-align: right; line-height: 1.4;"></span>
         </div>
         <div class="history-container" id="historyGrid">
             <!-- Cards will be dynamically inserted here -->
@@ -41,13 +46,20 @@
                 if (storedHistory) {
                     historyData = JSON.parse(storedHistory);
                 }
-            } catch(e) {
+            } catch (e) {
                 console.error('Failed to load history', e);
             }
 
             const totalCards = localStorage.getItem('totalCards') || '?';
+            const totalRareCards = localStorage.getItem('totalRareCards') || '?';
+
+            const foundRare = historyData.filter(item => typeof item === 'object' && item !== null && item.style === 'rare').length;
+
             const statsSpan = document.getElementById('historyStats');
-            statsSpan.textContent = `Found ${historyData.length} of ${totalCards} cards`;
+            statsSpan.innerHTML = `
+                <span>Cards: ${historyData.length} of ${totalCards}</span>
+                <span>Rare: ${foundRare} of ${totalRareCards}</span>
+            `;
 
             if (historyData.length === 0) {
                 grid.innerHTML = '<p style="color: #8a7280; text-align: center; grid-column: 1 / -1;">No history yet. Start exploring!</p>';
@@ -110,4 +122,5 @@
         });
     </script>
 </body>
+
 </html>

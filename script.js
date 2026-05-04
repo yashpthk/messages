@@ -438,6 +438,7 @@ if (initUnlocked) {
 dataLoaded.then(() => {
     runSmokeTests();
     localStorage.setItem('totalCards', messages.length + 2); // +2 for FIRST_UNLOCK_MESSAGE and SECOND_STATIC_MESSAGE
+    localStorage.setItem('totalRareCards', messages.filter(m => m.style === 'rare').length);
 
     if (localStorage.getItem(STORAGE_KEY) === 'true') {
         const selectedHistory = localStorage.getItem('selectedHistoryCard');
