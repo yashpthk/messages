@@ -25,7 +25,7 @@ try {
     if (storedHistory) {
         messageHistory = JSON.parse(storedHistory);
     }
-} catch(e) {
+} catch (e) {
     console.error('Could not load history from local storage', e);
 }
 
@@ -107,7 +107,7 @@ async function checkPassword() {
 
         failedAttempts += 1;
         document.getElementById('error').textContent = '';
-        document.getElementById('hint').textContent = 'Not quite.';
+        document.getElementById('hint').textContent = 'Not quite. Something we both know.';
 
         if (failedAttempts >= 2) document.getElementById('hint').innerHTML = '<div>Think of a café.</div>';
         if (failedAttempts >= 3) document.getElementById('hint').innerHTML = '<div>Its not complicated.</div>';

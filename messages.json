@@ -321,16 +321,16 @@
     "id": 57
   },
   {
-    "text": "Quack for a tiny surprise",
-    "actionLabel": "Quack",
-    "actionType": "quack",
-    "id": 58
-  },
-  {
     "text": "Impatience can be charming on you. Tap to receive dramatic validation",
     "actionLabel": "Receive",
     "actionType": "validation",
     "style": "rare",
+    "id": 58
+  },
+  {
+    "text": "Quack for a tiny surprise",
+    "actionLabel": "Quack",
+    "actionType": "quack",
     "id": 59
   },
   {
@@ -396,144 +396,143 @@
     "id": 69
   },
   {
-    "text": "Ultra rare mission: The best coffee and breakfast, I guarantee.",
-    "actionLabel": "Reveal schedule",
-    "actionUrl": "https://wa.me/491717585049?text=Secret%20mission%20response%3A%20I%E2%80%99m%20free%20on%20...",
-    "style": "rare",
-    "id": 70
-  },
-  {
     "text": "Let me pretend to be mysterious, over brunch?",
     "actionLabel": "Invite me",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20You%20may%20pretend%20to%20be%20mysterious%20over%20brunch.%20When%20are%20you%20free%3F",
     "style": "special",
-    "id": 71
+    "id": 70
   },
   {
     "text": "Let me pretend to be mysterious, over coffee?",
     "actionLabel": "Invite me",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20You%20may%20pretend%20to%20be%20mysterious%20over%20coffee.%20When%20are%20you%20free%3F",
-    "id": 72
+    "id": 71
   },
   {
     "text": "Let me pretend to be mysterious, over lunch?",
     "actionLabel": "Invite me",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20You%20may%20pretend%20to%20be%20mysterious%20over%20lunch.%20When%20are%20you%20free%3F",
-    "id": 73
+    "id": 72
   },
   {
     "text": "Let me pretend to be mysterious, over dinner?",
     "actionLabel": "Invite me",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20You%20may%20pretend%20to%20be%20mysterious%20over%20dinner.%20When%20are%20you%20free%3F",
     "style": "special",
-    "id": 74
+    "id": 73
   },
   {
     "text": "A bagel date to pretend we are in university still?",
     "actionLabel": "Enroll me",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20Enroll%20me%20in%20the%20bagel%20date%20immediately.%20%F0%9F%A5%AF",
-    "id": 75
+    "id": 74
   },
   {
     "text": "Want to cosplay as students over bagels?",
     "actionLabel": "Attend class",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20I%20would%20like%20to%20attend%20bagel%20class.%20%F0%9F%A5%AF",
-    "id": 76
+    "id": 75
   },
   {
     "text": "Eggdrop sandwiches before the world asks things of us?",
     "actionLabel": "Protect this",
     "actionUrl": "https://wa.me/491717585049?text=Yes.%20Let%E2%80%99s%20eat%20Eggdrop%20before%20responsibility%20finds%20us.%20%F0%9F%A5%AA",
     "style": "special",
-    "id": 77
+    "id": 76
   },
   {
     "text": "Cookie hunting and pretending it is cultural research?",
     "actionLabel": "For science",
     "actionUrl": "https://wa.me/491717585049?text=For%20science.%20I%20will%20participate%20in%20this%20research.%20%F0%9F%8D%AA",
     "style": "special",
-    "id": 78
+    "id": 77
   },
   {
     "text": "Pretending we understand what we're talking about over lunch?",
     "actionLabel": "Bold choice",
     "actionUrl": "https://wa.me/491717585049?text=Bold%20choice.%20I%20will%20pretend%20to%20understand%20over%20lunch.%20%F0%9F%8D%9F",
-    "id": 79
+    "id": 78
   },
   {
     "text": "Pretending we understand what we're talking about over coffee?",
     "actionLabel": "Bold choice",
     "actionUrl": "https://wa.me/491717585049?text=Bold%20choice.%20I%20will%20pretend%20to%20understand%20over%20coffee.%20%F0%9F%8D%9F",
-    "id": 80
+    "id": 79
   },
   {
     "text": "Savants: When Brilliance Drops In",
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/episode/4yaRG6sis1JDjY4bCrv08s?si=MPr7_rKlT7eww9DAC5_qSQ",
-    "id": 81
+    "id": 80
   },
   {
     "text": "Limetown (the show that got me into podcasts)",
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/show/1tshi3C3cIBEj6XkyLuo6b?si=9b8ab61f4ef24c48",
-    "id": 82
+    "id": 81
   },
   {
     "text": "The Anthropocene Reviewed – Auld Lang Syne",
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/episode/0fyFhJxP1cRVziLGdTXFLY?si=mlrnG5dBTemIbMKun9F7Dw",
-    "id": 83
+    "id": 82
   },
   {
     "text": "Endless Thread – The Great Glitter Mystery",
     "actionLabel": "🎙️ Listen",
     "actionType": "podcast",
     "actionUrl": "https://open.spotify.com/episode/30k87wR3mgtNXHLB1whirs?si=J4aY-t6nQnG9jnYVLP9n_Q",
-    "id": 84
+    "id": 83
   },
   {
     "text": "Maybe a build a cat instead?",
     "actionLabel": " 🐾 Show me",
     "actionUrl": "https://uchinoko-maker.jp/?lang=en-US",
+    "actionType": "podcast",
+    "id": 84
+  },
+  {
+    "text": "Maybe design your ideal cold coffee?",
+    "actionLabel": "🧪 For science",
+    "actionUrl": "https://makeyourselfacoldcoffee.lovable.app/makeyourselfacoldcoffee",
     "actionType": "podcast",
     "id": 85
   },
   {
-    "text": "Maybe design your ideal cold coffee?",
-    "actionLabel": "🧪 For science",
-    "actionUrl": "https://makeyourselfacoldcoffee.lovable.app/makeyourselfacoldcoffee",
-    "actionType": "podcast",
-    "id": 86
-  },
-  {
     "text": "Trust in Deutsche Bahn. Or don’t.",
     "actionLabel": "I'm curious",
     "actionUrl": "https://bahn.bet/",
     "actionType": "podcast",
-    "id": 87
+    "id": 86
   },
   {
     "text": "Maybe a build a cat instead?",
     "actionLabel": " 🐾 Show me",
     "actionUrl": "https://uchinoko-maker.jp/?lang=en-US",
     "actionType": "podcast",
-    "id": 88
+    "id": 87
   },
   {
     "text": "Maybe design your ideal cold coffee?",
     "actionLabel": "🧪 For science",
     "actionUrl": "https://makeyourselfacoldcoffee.lovable.app/makeyourselfacoldcoffee",
     "actionType": "podcast",
-    "id": 89
+    "id": 88
   },
   {
     "text": "Trust in Deutsche Bahn. Or don’t.",
     "actionLabel": "I'm curious",
     "actionUrl": "https://bahn.bet/",
     "actionType": "podcast",
+    "id": 89
+  },
+  {
+    "text": "Zeit für Brot and a slow start to the day?",
+    "actionLabel": "That sounds nice",
+    "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8",
     "id": 90
   },
   {
@@ -543,9 +542,10 @@
     "id": 91
   },
   {
-    "text": "Zeit für Brot and a slow start to the day?",
-    "actionLabel": "That sounds nice",
-    "actionUrl": "https://wa.me/491717585049?text=Zeit%20f%C3%BCr%20Brot%20and%20a%20slow%20morning%3F%20%E2%9C%A8",
+    "text": "Ultra rare mission: The best coffee and breakfast, I guarantee.",
+    "actionLabel": "Reveal schedule",
+    "actionUrl": "https://wa.me/491717585049?text=Secret%20mission%20response%3A%20I%E2%80%99m%20free%20on%20...",
+    "style": "rare",
     "id": 92
   }
 ]
