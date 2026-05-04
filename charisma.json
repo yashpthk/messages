@@ -1,19 +1,70 @@
 [
-  "Charisma unlocked.",
-  "Dangerously convincing.",
-  "Social damage increased.",
-  "Compliment magnet detected.",
-  "Main character energy confirmed.",
-  "Presence upgraded.",
-  "Charm level increased.",
-  "Confidence buff applied.",
-  "Magnetic energy detected.",
-  "Room impact +10.",
-  "Aura refreshed.",
-  "You look like good decisions.",
-  "Conversation stats boosted.",
-  "Elegant menace enabled.",
-  "Social critical hit.",
-  "Poise restored.",
-  "Likability patch installed."
+  {
+    "text": "Charisma unlocked.",
+    "id": 107
+  },
+  {
+    "text": "Dangerously convincing.",
+    "id": 108
+  },
+  {
+    "text": "Social damage increased.",
+    "id": 109
+  },
+  {
+    "text": "Compliment magnet detected.",
+    "id": 110
+  },
+  {
+    "text": "Main character energy confirmed.",
+    "id": 111
+  },
+  {
+    "text": "Presence upgraded.",
+    "id": 112
+  },
+  {
+    "text": "Charm level increased.",
+    "id": 113
+  },
+  {
+    "text": "Confidence buff applied.",
+    "id": 114
+  },
+  {
+    "text": "Magnetic energy detected.",
+    "id": 115
+  },
+  {
+    "text": "Room impact +10.",
+    "id": 116
+  },
+  {
+    "text": "Aura refreshed.",
+    "id": 117
+  },
+  {
+    "text": "You look like good decisions.",
+    "id": 118
+  },
+  {
+    "text": "Conversation stats boosted.",
+    "id": 119
+  },
+  {
+    "text": "Elegant menace enabled.",
+    "id": 120
+  },
+  {
+    "text": "Social critical hit.",
+    "id": 121
+  },
+  {
+    "text": "Poise restored.",
+    "id": 122
+  },
+  {
+    "text": "Likability patch installed.",
+    "id": 123
+  }
 ]

@@ -4,18 +4,30 @@ let chaosLines = [];
 
 const PASSWORD_HASH = 'a3ecbba54d84a5c73c49fc513c02b333b924ed64f79b02e572a38c9ddc1b8651';
 const FIRST_UNLOCK_MESSAGE = {
+    id: -1,
     text: 'Happy Birthday!',
     style: 'celebratory',
     actionType: 'explain',
     actionLabel: 'Celebrate!'
 };
 const SECOND_STATIC_MESSAGE = {
+    id: -2,
     text: 'This is a curated mix of thoughts, distractions, and occasional chaos.\nSome cards are rarer than others.',
     style: 'intro'
 };
 const STORAGE_KEY = 'messagesUnlocked';
 
 let messages = [];
+let messageHistory = [];
+
+try {
+    const storedHistory = localStorage.getItem('cardHistory');
+    if (storedHistory) {
+        messageHistory = JSON.parse(storedHistory);
+    }
+} catch(e) {
+    console.error('Could not load history from local storage', e);
+}
 
 let dramaticLines = [];
 
@@ -47,12 +59,26 @@ function getRandomItem(items, lastItem = null) {
 }
 
 function getDeckMessage() {
-    if (remaining.length === 0) {
-        remaining = [...messages];
+    let validRemaining = remaining;
+
+    if (messageHistory.length < 20) {
+        validRemaining = remaining.filter(m => (typeof m === 'string' || m.style !== 'rare'));
     }
-    const index = Math.floor(Math.random() * remaining.length);
-    const messageData = remaining[index];
-    return remaining.splice(index, 1)[0];
+
+    if (validRemaining.length === 0) {
+        remaining = [...messages];
+        validRemaining = messageHistory.length < 20 ? remaining.filter(m => (typeof m === 'string' || m.style !== 'rare')) : remaining;
+    }
+
+    const validIndex = Math.floor(Math.random() * validRemaining.length);
+    const messageData = validRemaining[validIndex];
+
+    const originalIndex = remaining.indexOf(messageData);
+    if (originalIndex !== -1) {
+        remaining.splice(originalIndex, 1);
+    }
+
+    return messageData;
 }
 
 async function sha256(text) {
@@ -149,6 +175,26 @@ function showMessage(messageData, skipFade = false) {
     el.classList.remove('specialMessage', 'rareMessage', 'celebratoryMessage');
     clearCardModes();
 
+    const messageId = typeof messageData === 'object' && messageData !== null ? messageData.id : undefined;
+    const isSpecialFirstMessage = messageId === FIRST_UNLOCK_MESSAGE.id || messageId === SECOND_STATIC_MESSAGE.id;
+    if (messageId !== undefined) {
+        const isDuplicate = messageHistory.some(item => {
+            return (typeof item === 'object' && item !== null ? item.id : undefined) === messageId;
+        });
+        if (!isDuplicate) {
+            messageHistory.push(messageData);
+            localStorage.setItem('cardHistory', JSON.stringify(messageHistory));
+        }
+    }
+    const histBtn = document.getElementById('historyBtn');
+    if (histBtn) {
+        if (messageHistory.length > 0 && !isSpecialFirstMessage) {
+            histBtn.style.display = 'block';
+        } else {
+            histBtn.style.display = 'none';
+        }
+    }
+
     window.setTimeout(() => {
         el.textContent = text;
 
@@ -225,8 +271,10 @@ function onReroll(targetMessage = null) {
 
     el.classList.add('slot-machine-text');
 
+    const validMessages = messageHistory.length < 20 ? messages.filter(m => (typeof m === 'string' || m.style !== 'rare')) : messages;
+
     const rollInterval = setInterval(() => {
-        let interim = messages[Math.floor(Math.random() * messages.length)];
+        let interim = validMessages[Math.floor(Math.random() * validMessages.length)];
         el.textContent = typeof interim === 'string' ? interim : interim.text;
 
         rolls++;
@@ -249,10 +297,11 @@ function showRandomMessage() {
     showMessage(getDeckMessage());
 }
 
+
 function showDramaticValidation() {
     const item = getRandomItem(dramaticLines, lastValidation);
     lastValidation = item;
-    document.getElementById('validationText').textContent = item;
+    document.getElementById('validationText').textContent = typeof item === 'object' ? item.text : item;
     document.getElementById('validationOverlay').style.display = 'flex';
 }
 
@@ -266,7 +315,7 @@ function showCharismaUnlock() {
 
     const item = getRandomItem(charismaLines, lastCharisma);
     lastCharisma = item;
-    document.getElementById('charismaText').textContent = item;
+    document.getElementById('charismaText').textContent = typeof item === 'object' ? item.text : item;
     document.getElementById('charismaSub').textContent = 'Charisma level: ' + percent + '%';
     document.getElementById('charismaOverlay').style.display = 'flex';
     fill.style.width = '0%';
@@ -341,6 +390,7 @@ function fillScreenWithEmoji(emoji) {
 function lockPage() {
     localStorage.removeItem(STORAGE_KEY);
     failedAttempts = 0;
+    document.getElementById('historyBtn').style.display = 'none';
     document.getElementById('hint').innerHTML = '';
     document.getElementById('error').textContent = '';
     document.getElementById('passwordInput').value = '';
@@ -378,11 +428,24 @@ if (initUnlocked) {
 
 dataLoaded.then(() => {
     runSmokeTests();
+    localStorage.setItem('totalCards', messages.length + 2); // +2 for FIRST_UNLOCK_MESSAGE and SECOND_STATIC_MESSAGE
 
     if (localStorage.getItem(STORAGE_KEY) === 'true') {
-        const currentMessage = document.getElementById('message').textContent;
-        if (!currentMessage) {
-            showRandomMessage();
+        const selectedHistory = localStorage.getItem('selectedHistoryCard');
+        if (selectedHistory) {
+            try {
+                const parsedCard = JSON.parse(selectedHistory);
+                localStorage.removeItem('selectedHistoryCard');
+                showMessage(parsedCard);
+            } catch (e) {
+                console.error("Failed to parse selected history card", e);
+                showRandomMessage();
+            }
+        } else {
+            const currentMessage = document.getElementById('message').textContent;
+            if (!currentMessage) {
+                showRandomMessage();
+            }
         }
     }
 });

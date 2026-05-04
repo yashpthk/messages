@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ History</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            align-items: flex-start;
+            padding-top: 48px;
+        }
+        .history-container .card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .history-container .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body>
+    <div class="history-page-wrapper">
+        <div class="search-container" style="align-items: center;">
+            <input type="text" id="searchInput" placeholder="Search found history...">
+            <span id="historyStats" style="margin-left: 16px; color: #8a7280; font-size: 0.9rem; white-space: nowrap;"></span>
+        </div>
+        <div class="history-container" id="historyGrid">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('historyGrid');
+            let historyData = [];
+
+            try {
+                const storedHistory = localStorage.getItem('cardHistory');
+                if (storedHistory) {
+                    historyData = JSON.parse(storedHistory);
+                }
+            } catch(e) {
+                console.error('Failed to load history', e);
+            }
+
+            const totalCards = localStorage.getItem('totalCards') || '?';
+            const statsSpan = document.getElementById('historyStats');
+            statsSpan.textContent = `Found ${historyData.length} of ${totalCards} cards`;
+
+            if (historyData.length === 0) {
+                grid.innerHTML = '<p style="color: #8a7280; text-align: center; grid-column: 1 / -1;">No history yet. Start exploring!</p>';
+                return;
+            }
+
+            historyData.forEach(item => {
+                const isObjectMessage = typeof item === 'object' && item !== null;
+                const text = isObjectMessage ? item.text : item;
+
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card';
+                cardDiv.dataset.text = text.toLowerCase();
+
+                const msgP = document.createElement('p');
+                msgP.className = 'message';
+                msgP.textContent = text;
+
+                if (isObjectMessage) {
+                    if (item.style === 'special') {
+                        cardDiv.classList.add('specialCard');
+                        msgP.classList.add('specialMessage');
+                    } else if (item.style === 'rare') {
+                        cardDiv.classList.add('rareCard');
+                        msgP.classList.add('rareMessage');
+                    } else if (item.style === 'celebratory') {
+                        cardDiv.classList.add('celebratoryCard');
+                        msgP.classList.add('celebratoryMessage');
+                    } else if (item.style === 'intro') {
+                        cardDiv.classList.add('introCard');
+                    }
+
+                    if (item.actionType === 'validation') cardDiv.classList.add('validationCard');
+                    else if (item.actionType === 'charisma') cardDiv.classList.add('charismaCard');
+                    else if (item.actionType === 'chaos') cardDiv.classList.add('chaosCard');
+                    else if (item.actionType === 'podcast') cardDiv.classList.add('podcastCard');
+                }
+
+                cardDiv.onclick = () => {
+                    localStorage.setItem('selectedHistoryCard', JSON.stringify(item));
+                    window.location.href = 'index.html';
+                };
+
+                cardDiv.appendChild(msgP);
+                grid.appendChild(cardDiv);
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const cards = grid.querySelectorAll('.card');
+                cards.forEach(card => {
+                    if (card.dataset.text.includes(query)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
