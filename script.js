@@ -59,15 +59,24 @@ function getRandomItem(items, lastItem = null) {
 }
 
 function getDeckMessage() {
-    let validRemaining = remaining;
+    // Add + 1 so id: 10 is the 10th card, and id: 92 is the 92nd card (right before deck reset)
+    const matchId = messages.length - remaining.length + 1;
+    const rareMatch = remaining.find(m => m.style === 'rare' && m.id === matchId);
 
-    if (messageHistory.length < 20) {
-        validRemaining = remaining.filter(m => (typeof m === 'string' || m.style !== 'rare'));
+    if (rareMatch) {
+        const originalIndex = remaining.indexOf(rareMatch);
+        if (originalIndex !== -1) {
+            remaining.splice(originalIndex, 1);
+        }
+        return rareMatch;
     }
+
+    // Always filter out rare cards so they ONLY appear deterministically
+    let validRemaining = remaining.filter(m => (typeof m === 'string' || m.style !== 'rare'));
 
     if (validRemaining.length === 0) {
         remaining = [...messages];
-        validRemaining = messageHistory.length < 20 ? remaining.filter(m => (typeof m === 'string' || m.style !== 'rare')) : remaining;
+        validRemaining = remaining.filter(m => (typeof m === 'string' || m.style !== 'rare'));
     }
 
     const validIndex = Math.floor(Math.random() * validRemaining.length);
