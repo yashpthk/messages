@@ -36,25 +36,26 @@
     "id": 9
   },
   {
-    "text": "Proof that I think of you!",
-    "style": "rare",
+    "text": "Your wrist looks expensive now",
     "id": 10
   },
   {
-    "text": "Your wrist looks expensive now",
+    "text": "You wear attention very well",
     "id": 11
   },
   {
-    "text": "You wear attention very well",
-    "id": 12
-  },
-  {
     "text": "Some things deserve more time",
-    "id": 13
+    "id": 12
   },
   {
     "text": "Smart watch. Smarter owner.",
     "style": "special",
+    "id": 13
+  },
+  {
+    "text": "You have unlocked a suspiciously convenient coffee invitation.",
+    "actionLabel": "Sounds illegal",
+    "actionUrl": "https://wa.me/491717585049?text=This%20feels%20suspicious%2C%20but%20I%20accept%20the%20coffee%20invitation%20%E2%98%95",
     "id": 14
   },
   {
@@ -64,40 +65,40 @@
     "id": 15
   },
   {
-    "text": "You have unlocked a suspiciously convenient coffee invitation.",
-    "actionLabel": "Sounds illegal",
-    "actionUrl": "https://wa.me/491717585049?text=This%20feels%20suspicious%2C%20but%20I%20accept%20the%20coffee%20invitation%20%E2%98%95",
+    "text": "Craving a good time at Crave?",
+    "actionLabel": "Absolutely",
+    "actionUrl": "https://wa.me/491717585049?text=Crave%20soon%3F%20I%20feel%20like%20this%20is%20a%20good%20idea%20%E2%98%95",
     "id": 16
+  },
+  {
+    "text": "Coffee at Treppe?",
+    "actionLabel": "Is that even a question?",
+    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Treppe%3F%20%E2%98%95",
+    "id": 17
+  },
+  {
+    "text": "Coffee at Treppe?",
+    "actionLabel": "Is that even a question?",
+    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Treppe%3F%20%E2%98%95",
+    "id": 18
   },
   {
     "text": "Taraba sometime this week?",
     "actionLabel": "Totally",
     "actionUrl": "https://wa.me/491717585049?text=Taraba%20sometime%20this%20week%3F%20%E2%98%95%20Totally.",
     "style": "rare",
-    "id": 17
-  },
-  {
-    "text": "Craving a good time at Crave?",
-    "actionLabel": "Absolutely",
-    "actionUrl": "https://wa.me/491717585049?text=Crave%20soon%3F%20I%20feel%20like%20this%20is%20a%20good%20idea%20%E2%98%95",
-    "id": 18
-  },
-  {
-    "text": "Coffee at Treppe?",
-    "actionLabel": "Is that even a question?",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Treppe%3F%20%E2%98%95",
     "id": 19
   },
   {
-    "text": "Coffee at Treppe?",
+    "text": "Coffee at Harry\u0027s?",
     "actionLabel": "Is that even a question?",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Treppe%3F%20%E2%98%95",
+    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Harry%27s%3F%20%E2%98%95",
     "id": 20
   },
   {
-    "text": "Coffee at Harry's?",
-    "actionLabel": "Is that even a question?",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20Harry%27s%3F%20%E2%98%95",
+    "text": "Coffee at _______?",
+    "actionLabel": "I know a few places",
+    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20_______%3F%20%E2%98%95",
     "id": 21
   },
   {
@@ -107,9 +108,9 @@
     "id": 22
   },
   {
-    "text": "Coffee at _______?",
-    "actionLabel": "I know a few places",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20at%20_______%3F%20%E2%98%95",
+    "text": "A walk through the park?",
+    "actionLabel": "Okay",
+    "actionUrl": "https://wa.me/491717585049?text=Walk%20later%3F%20%E2%9C%A8",
     "id": 23
   },
   {
@@ -119,9 +120,9 @@
     "id": 24
   },
   {
-    "text": "A walk through the park?",
-    "actionLabel": "Okay",
-    "actionUrl": "https://wa.me/491717585049?text=Walk%20later%3F%20%E2%9C%A8",
+    "text": "Dessert mission?",
+    "actionLabel": "Obviously",
+    "actionUrl": "https://wa.me/491717585049?text=Dessert%20mission%3F%20%F0%9F%8D%B0",
     "id": 25
   },
   {
@@ -131,9 +132,9 @@
     "id": 26
   },
   {
-    "text": "Dessert mission?",
-    "actionLabel": "Obviously",
-    "actionUrl": "https://wa.me/491717585049?text=Dessert%20mission%3F%20%F0%9F%8D%B0",
+    "text": "A tiny shortcut to me",
+    "actionLabel": "Open",
+    "actionUrl": "https://wa.me/491717585049?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95",
     "id": 27
   },
   {
@@ -143,9 +144,9 @@
     "id": 28
   },
   {
-    "text": "A tiny shortcut to me",
+    "text": "In case of emergency: tap",
     "actionLabel": "Open",
-    "actionUrl": "https://wa.me/491717585049?text=Hi%20you.%20You%20were%20apparently%20the%20tiny%20shortcut%20I%20was%20meant%20to%20use.%20%E2%98%95",
+    "actionUrl": "https://wa.me/491717585049?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95",
     "id": 29
   },
   {
@@ -155,9 +156,9 @@
     "id": 30
   },
   {
-    "text": "In case of emergency: tap",
-    "actionLabel": "Open",
-    "actionUrl": "https://wa.me/491717585049?text=Emergency%20declared.%20This%20tap%20has%20led%20directly%20to%20you.%20%E2%98%95",
+    "text": "Coffee soon?",
+    "actionLabel": "Dangerously yes",
+    "actionUrl": "https://wa.me/491717585049?text=Coffee%20soon%3F%20Dangerously%20yes.%20%E2%98%95",
     "id": 31
   },
   {
@@ -185,15 +186,14 @@
     "id": 35
   },
   {
-    "text": "Coffee soon?",
-    "actionLabel": "Dangerously yes",
-    "actionUrl": "https://wa.me/491717585049?text=Coffee%20soon%3F%20Dangerously%20yes.%20%E2%98%95",
-    "id": 36
-  },
-  {
     "text": "Lunch this week?",
     "actionLabel": "I could be convinced",
     "actionUrl": "https://wa.me/491717585049?text=Lunch%20this%20week%3F%20I%20could%20be%20convinced.%20%E2%9C%A8",
+    "id": 36
+  },
+  {
+    "text": "Proof that I think of you!",
+    "style": "rare",
     "id": 37
   },
   {
@@ -227,13 +227,13 @@
     "id": 42
   },
   {
-    "text": "Tap if you forgot you're impressive",
+    "text": "Tap if you forgot you\u0027re impressive",
     "actionLabel": "Remind me",
     "actionType": "validation",
     "id": 43
   },
   {
-    "text": "Tap if you forgot you're impressive",
+    "text": "Tap if you forgot you\u0027re impressive",
     "actionLabel": "Remind me",
     "actionType": "validation",
     "id": 44
@@ -365,19 +365,19 @@
   },
   {
     "text": "Walk and overthink outdoors?",
-    "actionLabel": "Let's go",
+    "actionLabel": "Let\u0027s go",
     "actionUrl": "https://wa.me/491717585049?text=Walk%20and%20overthink%20outdoors%3F%20%F0%9F%9A%B6",
     "id": 65
   },
   {
     "text": "Walk and overthink outdoors?",
-    "actionLabel": "Let's go",
+    "actionLabel": "Let\u0027s go",
     "actionUrl": "https://wa.me/491717585049?text=Walk%20and%20overthink%20outdoors%3F%20%F0%9F%9A%B6",
     "id": 66
   },
   {
     "text": "Walk and overthink outdoors?",
-    "actionLabel": "Let's go",
+    "actionLabel": "Let\u0027s go",
     "actionUrl": "https://wa.me/491717585049?text=Walk%20and%20overthink%20outdoors%3F%20%F0%9F%9A%B6",
     "id": 67
   },
@@ -448,13 +448,13 @@
     "id": 77
   },
   {
-    "text": "Pretending we understand what we're talking about over lunch?",
+    "text": "Pretending we understand what we\u0027re talking about over lunch?",
     "actionLabel": "Bold choice",
     "actionUrl": "https://wa.me/491717585049?text=Bold%20choice.%20I%20will%20pretend%20to%20understand%20over%20lunch.%20%F0%9F%8D%9F",
     "id": 78
   },
   {
-    "text": "Pretending we understand what we're talking about over coffee?",
+    "text": "Pretending we understand what we\u0027re talking about over coffee?",
     "actionLabel": "Bold choice",
     "actionUrl": "https://wa.me/491717585049?text=Bold%20choice.%20I%20will%20pretend%20to%20understand%20over%20coffee.%20%F0%9F%8D%9F",
     "id": 79
@@ -503,7 +503,7 @@
   },
   {
     "text": "Trust in Deutsche Bahn. Or don’t.",
-    "actionLabel": "I'm curious",
+    "actionLabel": "I\u0027m curious",
     "actionUrl": "https://bahn.bet/",
     "actionType": "podcast",
     "id": 86
@@ -524,7 +524,7 @@
   },
   {
     "text": "Trust in Deutsche Bahn. Or don’t.",
-    "actionLabel": "I'm curious",
+    "actionLabel": "I\u0027m curious",
     "actionUrl": "https://bahn.bet/",
     "actionType": "podcast",
     "id": 89
