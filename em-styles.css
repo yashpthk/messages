@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fdfaf6; /* Initial background matching original */
+    transition: background 3s ease-in-out;
+}
+
+#skyScene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 4s ease-in-out;
+    overflow: hidden;
+}
+
+#starsContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+#constellationSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* Constellation Line Animation */
+.constellation-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+.constellation-line.draw {
+    animation: drawLine 3s ease forwards;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Uranus Animation */
+#uranus {
+    transition: transform 15s linear, opacity 3s ease-in-out;
+}
+
+#uranus.drift {
+    transform: translate(-100px, -50px);
+}
+
+/* Final Text */
+#finalTextContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+    z-index: 20;
+}
+
+#finalText {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: #e0e0e0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+#nextArrow {
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#nextArrow:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+/* Adventures Overlay */
+#adventuresOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#adventuresContent {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+#adventuresContent svg {
+    width: 100%;
+    height: 100%;
+}
