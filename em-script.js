@@ -506,39 +506,29 @@ function showAdventures() {
             'adventuresOverlay'
         );
 
-    const content =
-        document.getElementById(
-            'adventuresContent'
-        );
-
     overlay.style.display = 'flex';
 
-    content.innerHTML = `
-        <div class="adventure-scene">
-            <img
-                src="adventures.jpg"
-                alt="Adventures"
-                class="adventure-image"
-            />
+    fetch('adventures.svg')
+        .then(response => response.text())
+        .then(svgText => {
 
-            <div class="adventure-text">
-                example text
-            </div>
-        </div>
-    `;
+            document.getElementById(
+                'adventuresContent'
+            ).innerHTML = svgText;
 
-    requestAnimationFrame(() => {
-        overlay.style.opacity = '1';
+            void overlay.offsetWidth;
 
-        const text =
-            document.querySelector(
-                '.adventure-text'
+            overlay.style.opacity = '1';
+
+        })
+        .catch(error => {
+
+            console.error(
+                'Error loading adventures SVG:',
+                error
             );
 
-        setTimeout(() => {
-            text.classList.add('visible');
-        }, 1200);
-    });
+        });
 }
 
 /* =========================
