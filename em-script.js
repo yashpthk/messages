@@ -470,13 +470,6 @@ function showUranus(x, y) {
 
             finalText.style.opacity = '1';
 
-            setTimeout(() => {
-
-                window.location.href =
-                    'em.html';
-
-            }, 7000);
-
         }, 5000);
 
     }, 2000);
