@@ -351,72 +351,71 @@ function animateConstellation() {
         }, i * 380);
     });
 
-    /* =========================
-       DRAW LINES
-    ========================= */
+   /* =========================
+   SHOW URANUS FIRST
+========================= */
 
-    setTimeout(() => {
+setTimeout(() => {
 
-        connections.forEach((conn, i) => {
+    showUranus(
+        cx + 120,
+        cy - 70
+    );
 
-            const p1 = points[conn[0]];
-            const p2 = points[conn[1]];
+}, 1800);
 
-            const line =
-                document.createElementNS(
-                    'http://www.w3.org/2000/svg',
-                    'line'
-                );
+/* =========================
+   DRAW LINES AFTER
+========================= */
 
-            line.setAttribute('x1', p1.x);
-            line.setAttribute('y1', p1.y);
-            line.setAttribute('x2', p2.x);
-            line.setAttribute('y2', p2.y);
+setTimeout(() => {
 
-            line.classList.add(
-                'constellation-line'
+    connections.forEach((conn, i) => {
+
+        const p1 = points[conn[0]];
+        const p2 = points[conn[1]];
+
+        const line =
+            document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'line'
             );
 
-            linesGroup.appendChild(line);
+        line.setAttribute('x1', p1.x);
+        line.setAttribute('y1', p1.y);
+        line.setAttribute('x2', p2.x);
+        line.setAttribute('y2', p2.y);
 
-            const length = Math.hypot(
-                p2.x - p1.x,
-                p2.y - p1.y
-            );
+        line.classList.add(
+            'constellation-line'
+        );
 
-            line.style.strokeDasharray =
-                length;
+        linesGroup.appendChild(line);
 
-            line.style.strokeDashoffset =
-                length;
+        const length = Math.hypot(
+            p2.x - p1.x,
+            p2.y - p1.y
+        );
 
-            setTimeout(() => {
+        line.style.strokeDasharray =
+            length;
 
-                line.style.transition =
-                    'stroke-dashoffset 2.5s ease';
-
-                line.style.strokeDashoffset =
-                    '0';
-
-            }, i * 450);
-
-        });
-
-        /* =========================
-           URANUS TIMING
-        ========================= */
+        line.style.strokeDashoffset =
+            length;
 
         setTimeout(() => {
 
-            showUranus(
-                cx + 120,
-                cy - 70
-            );
+            line.style.transition =
+                'stroke-dashoffset 2.5s ease';
 
-        }, 3400);
+            line.style.strokeDashoffset =
+                '0';
 
-    }, points.length * 320);
-}
+        }, i * 450);
+
+    });
+
+}, 3200);
 
 /* =========================
    URANUS
@@ -432,36 +431,57 @@ function showUranus(x, y) {
             'uranusResidualGlow'
         );
 
-    uranus.setAttribute('cx', x);
-    uranus.setAttribute('cy', y);
+    /* =========================
+       POSITION
+    ========================= */
 
-    residual.setAttribute('cx', x);
-    residual.setAttribute('cy', y);
+    // Near Aldebaran
+    const startX = x - 42;
+    const startY = y + 78;
+
+    uranus.setAttribute('cx', startX);
+    uranus.setAttribute('cy', startY);
+
+    residual.setAttribute('cx', startX);
+    residual.setAttribute('cy', startY);
+
+    /* =========================
+       APPEAR
+    ========================= */
 
     uranus.style.opacity = '1';
 
     residual.style.opacity = '0';
 
+    uranus.style.transform =
+        'translate(0px, 0px)';
+
+    /* =========================
+       DRIFT
+    ========================= */
+
     setTimeout(() => {
 
         uranus.style.transition =
-            'transform 10s ease-in-out, opacity 8s ease';
+            'transform 14s ease-in-out';
 
         uranus.style.transform =
-            'translate(220px, -140px)';
-
-        uranus.style.opacity = '0.12';
+            'translate(260px, -160px)';
 
         residual.style.transition =
-            'opacity 6s ease';
+            'opacity 8s ease';
 
-        residual.style.opacity = '0.35';
+        residual.style.opacity = '0.38';
 
-        document.getElementById(
-            'starsContainer'
-        ).style.opacity = '0.75';
+        /* =========================
+           FINAL TEXT
+        ========================= */
 
         setTimeout(() => {
+
+            document.getElementById(
+                'starsContainer'
+            ).style.opacity = '0.72';
 
             const finalText =
                 document.getElementById(
@@ -470,9 +490,9 @@ function showUranus(x, y) {
 
             finalText.style.opacity = '1';
 
-        }, 5000);
+        }, 7000);
 
-    }, 2000);
+    }, 1800);
 }
 
 /* =========================
@@ -486,29 +506,39 @@ function showAdventures() {
             'adventuresOverlay'
         );
 
+    const content =
+        document.getElementById(
+            'adventuresContent'
+        );
+
     overlay.style.display = 'flex';
 
-    fetch('adventures.svg')
-        .then(response => response.text())
-        .then(svgText => {
+    content.innerHTML = `
+        <div class="adventure-scene">
+            <img
+                src="adventures.jpg"
+                alt="Adventures"
+                class="adventure-image"
+            />
 
-            document.getElementById(
-                'adventuresContent'
-            ).innerHTML = svgText;
+            <div class="adventure-text">
+                example text
+            </div>
+        </div>
+    `;
 
-            void overlay.offsetWidth;
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
 
-            overlay.style.opacity = '1';
-
-        })
-        .catch(error => {
-
-            console.error(
-                'Error loading adventures SVG:',
-                error
+        const text =
+            document.querySelector(
+                '.adventure-text'
             );
 
-        });
+        setTimeout(() => {
+            text.classList.add('visible');
+        }, 1200);
+    });
 }
 
 /* =========================
