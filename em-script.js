@@ -172,7 +172,7 @@ function showUranus() {
     // Set initial position near the constellation
     const svgWidth = document.getElementById('constellationSvg').clientWidth;
     const svgHeight = document.getElementById('constellationSvg').clientHeight;
-    const startX = svgWidth * 0.5 + 40;
+    const startX = svgWidth * 0.5 - 40;
     const startY = svgHeight * 0.5 - 30;
 
     uranus.setAttribute('cx', startX);
