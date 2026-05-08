@@ -81,29 +81,29 @@ function generateStars() {
 function animateConstellation() {
     const linesGroup = document.getElementById('lines');
     const starsGroup = document.getElementById('stars');
-    const svgWidth = document.getElementById('constellationSvg').clientWidth;
-    const svgHeight = document.getElementById('constellationSvg').clientHeight;
+    const svgElement = document.getElementById('constellationSvg');
+    
+    // Get actual dimensions for centering or use fixed 800 if that's your viewBox
+    const svgWidth = svgElement.clientWidth || 800;
+    const svgHeight = svgElement.clientHeight || 800;
 
-    // Simple Taurus-like points relative to center
+    // Use the middle of the SVG as your anchor
     const cx = svgWidth * 0.5;
     const cy = svgHeight * 0.5;
 
-    // Relative mapping for a recognizable Taurus shape
-const cx = 400;
-    const cy = 400;
-
+    // Points mapped relative to the center (cx, cy)
     const points = [
-        { x: cx - 280, y: cy - 180, r: 9, name: "Elnath" },      // 0: Top Horn Tip
-        { x: cx - 340, y: cy + 30, r: 5, name: "Lower Horn Tip"},// 1: Lower Horn Tip
-        { x: cx - 80, y: cy - 30, r: 5, name: "Horn Mid 1" },    // 2: Upper horn joint
-        { x: cx - 10, y: cy + 60, r: 5, name: "Hyades Top" },    // 3: V Top
-        { x: cx - 40, y: cy + 150, r: 10, name: "Aldebaran" },   // 4: The Eye
-        { x: cx + 40, y: cy + 160, r: 5, name: "V Point" },      // 5: Apex of V
-        { x: cx + 140, y: cy + 240, r: 5, name: "Hyades Bottom"},// 6: Face lower
-        { x: cx + 320, y: cy + 320, r: 5, name: "Body Rear" },   // 7: Rear body
-        { x: cx + 340, y: cy + 350, r: 4, name: "Leg Tip" },     // 8: Back leg
-        { x: cx + 180, y: cy - 100, r: 3, name: "Pleiades 1" },  // 9: Cluster start
-        { x: cx + 210, y: cy - 80, r: 3, name: "Pleiades 2" }    // 10: Cluster end
+        { x: cx - 280, y: cy - 180, r: 9,  color: "#ffffff", name: "Elnath" },      // 0
+        { x: cx - 340, y: cy + 30,  r: 5,  color: "#ffffff", name: "Lower Horn Tip"},// 1
+        { x: cx - 80,  y: cy - 30,  r: 5,  color: "#ffffff", name: "Horn Mid 1" },    // 2
+        { x: cx - 10,  y: cy + 60,  r: 5,  color: "#ffffff", name: "Hyades Top" },    // 3
+        { x: cx - 40,  y: cy + 150, r: 10, color: "#ffccaa", name: "Aldebaran" },   // 4 (The Eye)
+        { x: cx + 40,  y: cy + 160, r: 5,  color: "#ffffff", name: "V Point" },      // 5
+        { x: cx + 140, y: cy + 240, r: 5,  color: "#ffffff", name: "Hyades Bottom"},// 6
+        { x: cx + 320, y: cy + 320, r: 5,  color: "#ffffff", name: "Body Rear" },   // 7
+        { x: cx + 340, y: cy + 350, r: 4,  color: "#ffffff", name: "Leg Tip" },     // 8
+        { x: cx + 180, y: cy - 100, r: 3,  color: "#ccddff", name: "Pleiades 1" },  // 9
+        { x: cx + 210, y: cy - 80,  r: 3,  color: "#ccddff", name: "Pleiades 2" }   // 10
     ];
 
     // Draw stars
@@ -112,8 +112,8 @@ const cx = 400;
             const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             circle.setAttribute("cx", p.x);
             circle.setAttribute("cy", p.y);
-            circle.setAttribute("r", i === 0 ? "4" : "2"); // Make Aldebaran slightly bigger
-            circle.setAttribute("fill", i === 0 ? "#ffccaa" : "#ffffff"); // Aldebaran color
+            circle.setAttribute("r", p.r); 
+            circle.setAttribute("fill", p.color);
             circle.style.opacity = '0';
             circle.style.transition = 'opacity 2s ease';
             starsGroup.appendChild(circle);
@@ -121,17 +121,18 @@ const cx = 400;
             // Trigger reflow
             void circle.offsetWidth;
             circle.style.opacity = '1';
-        }, i * 500); // Stagger star appearance
+        }, i * 300); // Slightly faster stagger for stars
     });
 
-    // The connections that form the 'V' and the long horns
-const connections = [
-        [0, 2], [2, 3],         // Upper horn line
-        [1, 4],                 // Lower horn line
+    // Connections
+    const connections = [
+        [0, 2], [2, 3],         // Upper horn
+        [1, 5],                 // Lower horn (connecting to V-apex)
         [3, 5], [4, 5], [5, 6], // The Hyades V
         [6, 7], [7, 8]          // The Body extension
-];
+    ];
 
+    // Wait for stars to be mostly visible before drawing lines
     setTimeout(() => {
         connections.forEach((conn, i) => {
             const p1 = points[conn[0]];
@@ -145,21 +146,20 @@ const connections = [
             line.classList.add('constellation-line');
             linesGroup.appendChild(line);
 
-            // Calculate length for stroke-dasharray animation
             const length = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
             line.style.strokeDasharray = length;
             line.style.strokeDashoffset = length;
 
             setTimeout(() => {
-                line.style.transition = 'stroke-dashoffset 2s ease';
+                line.style.transition = 'stroke-dashoffset 2s ease-in-out';
                 line.style.strokeDashoffset = '0';
-            }, i * 400); // Stagger line drawing
+            }, i * 400); 
         });
 
-        // After constellation is drawn, show Uranus
+        // Trigger Uranus after lines start drawing
         setTimeout(showUranus, 3000);
 
-    }, points.length * 500);
+    }, points.length * 300);
 }
 
 function showUranus() {
