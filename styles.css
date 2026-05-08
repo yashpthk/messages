@@ -260,6 +260,10 @@ button {
     position: absolute;
 }
 
+.nextBtn {
+  border: 0px;
+}
+
 .lockBtn {
     top: 14px;
     right: 14px;
