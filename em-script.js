@@ -130,7 +130,7 @@ function animateConstellation() {
     // Connections following the EarthSky layout
     const connections = [
         [0, 2], [2, 3],         // Upper horn
-        [1, 5],                 // Lower horn
+        [1, 4],                 // Lower horn
         [3, 5], [4, 5], [5, 6], // The Hyades V
         [6, 7], [7, 8]          // The Body extension
     ];
