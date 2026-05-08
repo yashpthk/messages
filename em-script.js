@@ -89,15 +89,22 @@ function animateConstellation() {
     const cy = svgHeight * 0.5;
 
     // Relative mapping for a recognizable Taurus shape
-const points = [
-    { x: cx, y: cy, name: "Aldebaran" },               // 0: The Eye (Orange-ish)
-    { x: cx - 40, y: cy - 40, name: "Epsilon Tau" },   // 1: Top of the 'V'
-    { x: cx - 20, y: cy + 50, name: "Gamma Tau" },     // 2: Bottom of the 'V'
-    { x: cx - 70, y: cy + 30, name: "Delta Tau" },     // 3: Side of the 'V'
-    { x: cx + 150, y: cy - 120, name: "El Nath" },     // 4: Tip of Upper Horn
-    { x: cx + 180, y: cy + 20, name: "Zeta Tau" },     // 5: Tip of Lower Horn
-    { x: cx - 200, y: cy - 80, name: "Pleiades" }      // 6: The Seven Sisters (Cluster)
-];
+const cx = 400;
+    const cy = 400;
+
+    const points = [
+        { x: cx - 280, y: cy - 180, r: 9, name: "Elnath" },      // 0: Top Horn Tip
+        { x: cx - 340, y: cy + 30, r: 5, name: "Lower Horn Tip"},// 1: Lower Horn Tip
+        { x: cx - 80, y: cy - 30, r: 5, name: "Horn Mid 1" },    // 2: Upper horn joint
+        { x: cx - 10, y: cy + 60, r: 5, name: "Hyades Top" },    // 3: V Top
+        { x: cx - 40, y: cy + 150, r: 10, name: "Aldebaran" },   // 4: The Eye
+        { x: cx + 40, y: cy + 160, r: 5, name: "V Point" },      // 5: Apex of V
+        { x: cx + 140, y: cy + 240, r: 5, name: "Hyades Bottom"},// 6: Face lower
+        { x: cx + 320, y: cy + 320, r: 5, name: "Body Rear" },   // 7: Rear body
+        { x: cx + 340, y: cy + 350, r: 4, name: "Leg Tip" },     // 8: Back leg
+        { x: cx + 180, y: cy - 100, r: 3, name: "Pleiades 1" },  // 9: Cluster start
+        { x: cx + 210, y: cy - 80, r: 3, name: "Pleiades 2" }    // 10: Cluster end
+    ];
 
     // Draw stars
     points.forEach((p, i) => {
@@ -119,9 +126,10 @@ const points = [
 
     // The connections that form the 'V' and the long horns
 const connections = [
-    [0, 2], [2, 3], [3, 1], // The Hyades 'V' shape
-    [1, 4],                 // Connection to upper horn
-    [0, 5],                 // Connection to lower horn
+        [0, 2], [2, 3],         // Upper horn line
+        [1, 4],                 // Lower horn line
+        [3, 5], [4, 5], [5, 6], // The Hyades V
+        [6, 7], [7, 8]          // The Body extension
 ];
 
     setTimeout(() => {
