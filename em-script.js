@@ -23,10 +23,10 @@ async function checkPassword() {
         document.getElementById('error').textContent = '';
         const hintEl = document.getElementById('hint');
 
-        if (failedAttempts === 1) hintEl.textContent = 'Not Quite. The mystery deepens.';
+        if (failedAttempts === 1) hintEl.textContent = 'Not Quite. You have found all cards...';
         else if (failedAttempts === 2) hintEl.textContent = 'This one is not easy.';
-        else if (failedAttempts === 3) hintEl.textContent = 'This one is not a Cafè.';
-        else if (failedAttempts === 4) hintEl.textContent = 'No any place.';
+        else if (failedAttempts === 3) hintEl.textContent = 'Is not a Cafè.';
+        else if (failedAttempts === 4) hintEl.textContent = 'Nor any place.';
         else if (failedAttempts === 5) hintEl.textContent = 'Last try or this locks forever.';
         else if (failedAttempts >= 6) {
             hintEl.textContent = 'You were bold with choosing to guess. And I was kidding.';
@@ -101,7 +101,7 @@ function animateConstellation() {
         { x: cx - (scale * 0.42), y: cy + (scale * 0.05), r: 4, color: "#ffffff" }, // 1: Lower Horn Tip
         { x: cx - (scale * 0.10), y: cy - (scale * 0.05), r: 4, color: "#ffffff" }, // 2: Horn Mid
         { x: cx - (scale * 0.02), y: cy + (scale * 0.08), r: 4, color: "#ffffff" }, // 3: Hyades Top
-        { x: cx - (scale * 0.05), y: cy + (scale * 0.20), r: 9, color: "#ffccaa" }, // 4: Aldebaran
+        { x: cx - (scale * 0.05), y: cy + (scale * 0.20), r: 7, color: "#ffccaa" }, // 4: Aldebaran
         { x: cx + (scale * 0.05), y: cy + (scale * 0.21), r: 4, color: "#ffffff" }, // 5: V Point
         { x: cx + (scale * 0.18), y: cy + (scale * 0.32), r: 4, color: "#ffffff" }, // 6: Hyades Bot
         { x: cx + (scale * 0.40), y: cy + (scale * 0.42), r: 4, color: "#ffffff" }, // 7: Body Rear
