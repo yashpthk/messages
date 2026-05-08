@@ -173,6 +173,7 @@ function showUranus() {
     // Wait a moment, then drift away
     setTimeout(() => {
         uranus.classList.add('drift');
+        uranus.style.opacity = '0'; // fade out as it drifts
 
         // After drifting starts, show final text
         setTimeout(() => {
