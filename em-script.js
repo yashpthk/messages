@@ -88,15 +88,16 @@ function animateConstellation() {
     const cx = svgWidth * 0.5;
     const cy = svgHeight * 0.5;
 
-    const points = [
-        { x: cx - 100, y: cy - 50 }, // Aldebaran
-        { x: cx - 150, y: cy + 20 },
-        { x: cx - 50, y: cy + 80 },
-        { x: cx + 20, y: cy + 40 },
-        { x: cx + 80, y: cy - 20 },
-        { x: cx + 120, y: cy - 80 }, // Pleiades area
-        { x: cx + 140, y: cy - 60 }
-    ];
+    // Relative mapping for a recognizable Taurus shape
+const points = [
+    { x: cx, y: cy, name: "Aldebaran" },               // 0: The Eye (Orange-ish)
+    { x: cx - 40, y: cy - 40, name: "Epsilon Tau" },   // 1: Top of the 'V'
+    { x: cx - 20, y: cy + 50, name: "Gamma Tau" },     // 2: Bottom of the 'V'
+    { x: cx - 70, y: cy + 30, name: "Delta Tau" },     // 3: Side of the 'V'
+    { x: cx + 150, y: cy - 120, name: "El Nath" },     // 4: Tip of Upper Horn
+    { x: cx + 180, y: cy + 20, name: "Zeta Tau" },     // 5: Tip of Lower Horn
+    { x: cx - 200, y: cy - 80, name: "Pleiades" }      // 6: The Seven Sisters (Cluster)
+];
 
     // Draw stars
     points.forEach((p, i) => {
@@ -116,10 +117,12 @@ function animateConstellation() {
         }, i * 500); // Stagger star appearance
     });
 
-    // Draw lines
-    const connections = [
-        [0, 1], [0, 2], [2, 3], [3, 4], [4, 5], [5, 6]
-    ];
+    // The connections that form the 'V' and the long horns
+const connections = [
+    [0, 2], [2, 3], [3, 1], // The Hyades 'V' shape
+    [1, 4],                 // Connection to upper horn
+    [0, 5],                 // Connection to lower horn
+];
 
     setTimeout(() => {
         connections.forEach((conn, i) => {
