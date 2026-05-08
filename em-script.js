@@ -168,8 +168,7 @@ function animateConstellation() {
 
 function showUranus() {
     const uranus = document.getElementById('uranus');
-    const residual = document.getElementById('uranusResidualGlow');
-
+    
     // Set initial position near the constellation
     const svgWidth = document.getElementById('constellationSvg').clientWidth;
     const svgHeight = document.getElementById('constellationSvg').clientHeight;
@@ -178,17 +177,13 @@ function showUranus() {
 
     uranus.setAttribute('cx', startX);
     uranus.setAttribute('cy', startY);
-    residual.setAttribute('cx', startX);
-    residual.setAttribute('cy', startY);
 
     // Fade in
     uranus.style.opacity = '1';
-    residual.style.opacity = '0.6';
 
     // Wait a moment, then drift away
     setTimeout(() => {
         uranus.classList.add('drift');
-        uranus.style.opacity = '0'; // fade out as it drifts
 
         // After drifting starts, show final text
         setTimeout(() => {
