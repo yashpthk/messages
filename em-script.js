@@ -81,35 +81,89 @@ function generateStars() {
 function animateConstellation() {
     const linesGroup = document.getElementById('lines');
     const starsGroup = document.getElementById('stars');
-    const svgElement = document.getElementById('constellationSvg');
+    const svg = document.getElementById('constellationSvg');
     
-    // Get actual dimensions
-    const svgWidth = svgElement.clientWidth;
-    const svgHeight = svgElement.clientHeight;
+    // 1. Get dynamic dimensions
+    const svgWidth = svg.clientWidth;
+    const svgHeight = svg.clientHeight;
 
-    // We use a "scale" factor to keep the constellation proportional
-    // This ensures it takes up roughly 80% of the smallest screen dimension
-    const s = Math.min(svgWidth, svgHeight) * 0.8; 
+    // 2. Establish a scale factor (80% of the smaller dimension)
+    // This prevents the "too big" problem on mobile.
+    const scale = Math.min(svgWidth, svgHeight) * 0.8;
+    
+    // 3. Center point
     const cx = svgWidth * 0.5;
-    const cy = svgHeight * 0.4; // Shifted up slightly to leave room for "Body"
+    const cy = svgHeight * 0.45; // Slightly above true center to account for the "body"
 
+    // 4. Points mapped as fractions of 'scale'
     const points = [
-        // Using s * decimal to make it responsive
-        { x: cx - (s * 0.35), y: cy - (s * 0.25), r: 7,  color: "#ffffff", name: "Elnath" },      // 0
-        { x: cx - (s * 0.40), y: cy + (s * 0.05), r: 4,  color: "#ffffff", name: "Lower Horn" },   // 1
-        { x: cx - (s * 0.10), y: cy - (s * 0.05), r: 4,  color: "#ffffff", name: "Horn Mid" },     // 2
-        { x: cx - (s * 0.02), y: cy + (s * 0.08), r: 4,  color: "#ffffff", name: "Hyades Top" },   // 3
-        { x: cx - (s * 0.05), y: cy + (s * 0.20), r: 8,  color: "#ffccaa", name: "Aldebaran" },    // 4
-        { x: cx + (s * 0.05), y: cy + (s * 0.21), r: 4,  color: "#ffffff", name: "V Point" },      // 5
-        { x: cx + (s * 0.18), y: cy + (s * 0.32), r: 4,  color: "#ffffff", name: "Hyades Bot" },   // 6
-        { x: cx + (s * 0.40), y: cy + (s * 0.42), r: 4,  color: "#ffffff", name: "Body Rear" },    // 7
-        { x: cx + (s * 0.43), y: cy + (s * 0.47), r: 3,  color: "#ffffff", name: "Leg Tip" },      // 8
-        { x: cx + (s * 0.23), y: cy - (s * 0.15), r: 3,  color: "#ccddff", name: "Pleiades 1" },   // 9
-        { x: cx + (s * 0.27), y: cy - (s * 0.12), r: 3,  color: "#ccddff", name: "Pleiades 2" }    // 10
+        { x: cx - (scale * 0.35), y: cy - (scale * 0.25), r: 6, color: "#ffffff" }, // 0: Elnath (Top Horn)
+        { x: cx - (scale * 0.42), y: cy + (scale * 0.05), r: 4, color: "#ffffff" }, // 1: Lower Horn Tip
+        { x: cx - (scale * 0.10), y: cy - (scale * 0.05), r: 4, color: "#ffffff" }, // 2: Horn Mid
+        { x: cx - (scale * 0.02), y: cy + (scale * 0.08), r: 4, color: "#ffffff" }, // 3: Hyades Top
+        { x: cx - (scale * 0.05), y: cy + (scale * 0.20), r: 9, color: "#ffccaa" }, // 4: Aldebaran
+        { x: cx + (scale * 0.05), y: cy + (scale * 0.21), r: 4, color: "#ffffff" }, // 5: V Point
+        { x: cx + (scale * 0.18), y: cy + (scale * 0.32), r: 4, color: "#ffffff" }, // 6: Hyades Bot
+        { x: cx + (scale * 0.40), y: cy + (scale * 0.42), r: 4, color: "#ffffff" }, // 7: Body Rear
+        { x: cx + (scale * 0.43), y: cy + (scale * 0.47), r: 3, color: "#ffffff" }, // 8: Leg Tip
+        { x: cx + (scale * 0.23), y: cy - (scale * 0.15), r: 3, color: "#ccddff" }, // 9: Pleiades 1
+        { x: cx + (scale * 0.27), y: cy - (scale * 0.12), r: 3, color: "#ccddff" }  // 10: Pleiades 2
     ];
 
-    // ... The rest of your star drawing and connection logic remains the same ...
+    // Draw stars
+    points.forEach((p, i) => {
+        setTimeout(() => {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", p.x);
+            circle.setAttribute("cy", p.y);
+            circle.setAttribute("r", p.r); // Use the radius from our points array
+            circle.setAttribute("fill", p.color); // Use the specific color
+            circle.style.opacity = '0';
+            circle.style.transition = 'opacity 2s ease';
+            starsGroup.appendChild(circle);
+
+            void circle.offsetWidth;
+            circle.style.opacity = '1';
+        }, i * 300);
+    });
+
+    // Connections following the EarthSky layout
+    const connections = [
+        [0, 2], [2, 3],         // Upper horn
+        [1, 5],                 // Lower horn
+        [3, 5], [4, 5], [5, 6], // The Hyades V
+        [6, 7], [7, 8]          // The Body extension
+    ];
+
+    setTimeout(() => {
+        connections.forEach((conn, i) => {
+            const p1 = points[conn[0]];
+            const p2 = points[conn[1]];
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", p1.x);
+            line.setAttribute("y1", p1.y);
+            line.setAttribute("x2", p2.x);
+            line.setAttribute("y2", p2.y);
+            line.classList.add('constellation-line');
+            linesGroup.appendChild(line);
+
+            const length = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+            line.style.strokeDasharray = length;
+            line.style.strokeDashoffset = length;
+
+            setTimeout(() => {
+                line.style.transition = 'stroke-dashoffset 2s ease-in-out';
+                line.style.strokeDashoffset = '0';
+            }, i * 400);
+        });
+
+        // Trigger Uranus after drawing starts
+        setTimeout(showUranus, 3000);
+
+    }, points.length * 300);
 }
+
 
 
 function showUranus() {
