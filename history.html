@@ -30,7 +30,7 @@
             <input type="text" id="searchInput" placeholder="Search found history...">
             <span id="historyStats"
                 style="margin-left: auto; color: #8a7280; font-size: 0.9rem; white-space: nowrap; display: flex; flex-direction: column; text-align: right; line-height: 1.4;"></span>
-            <button id="resetHistoryBtn" style="margin-left: 15px; padding: 6px 12px; font-size: 0.8rem; background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; border-radius: 4px; cursor: pointer; font-family: inherit;">Reset Data</button>
+            <button id="resetHistoryBtn" style="nextBtn">&#8634;</button>
         </div>
         <div class="history-container" id="historyGrid">
             <!-- Cards will be dynamically inserted here -->
@@ -124,7 +124,7 @@
             const resetBtn = document.getElementById('resetHistoryBtn');
             if (resetBtn) {
                 resetBtn.addEventListener('click', () => {
-                    if (confirm('Are you sure you want to delete all your history and saved data? This cannot be undone.')) {
+                    if (confirm('Are you sure you want to reset all your history and saved data?')) {
                         localStorage.clear();
                         window.location.href = 'index.html';
                     }
