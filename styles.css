@@ -247,6 +247,7 @@ button {
 
 .lockBtn,
 .nextBtn,
+.resetBtn,
 .rerollBtn {
     width: 34px;
     height: 34px;
@@ -259,6 +260,12 @@ button {
     font-size: 14px;
     line-height: 1;
     position: absolute;
+}
+
+.resetBtn {
+  border: 0px;
+  width: 24px;
+  height: 24px;
 }
 
 .nextBtn {
