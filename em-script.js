@@ -193,18 +193,43 @@ function showUranus() {
 }
 
 function showAdventures() {
-    const overlay = document.getElementById('adventuresOverlay');
+
+    const overlay =
+        document.getElementById(
+            'adventuresOverlay'
+        );
+
+    const content =
+        document.getElementById(
+            'adventuresContent'
+        );
+
     overlay.style.display = 'flex';
 
-    fetch('adventures.svg')
-        .then(response => response.text())
-        .then(svgText => {
-            document.getElementById('adventuresContent').innerHTML = svgText;
-            // Trigger reflow
-            void overlay.offsetWidth;
-            overlay.style.opacity = '1';
-        })
-        .catch(error => {
-            console.error("Error loading adventures SVG:", error);
-        });
+    content.innerHTML = `
+        <div class="adventure-scene">
+            <img
+                src="PICT0055.jpg"
+                alt="Adventures"
+                class="adventure-image"
+            />
+
+            <div class="adventure-text">
+                example text
+            </div>
+        </div>
+    `;
+
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+
+        const text =
+            document.querySelector(
+                '.adventure-text'
+            );
+
+        setTimeout(() => {
+            text.classList.add('visible');
+        }, 1200);
+    });
 }
