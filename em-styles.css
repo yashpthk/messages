@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: #fdfaf6; /* Initial background matching original */
+    background: #fdfaf6;
+    /* Initial background matching original */
     transition: background 3s ease-in-out;
 }
 
@@ -33,9 +34,17 @@ body {
 }
 
 @keyframes twinkle {
-    0% { opacity: 0; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 #constellationSvg {
@@ -67,7 +76,7 @@ body {
 }
 
 #uranus.drift {
-    transform: translate(225px, -80px);
+    transform: translate(150px, -90px);
 }
 
 /* Final Text */
@@ -128,14 +137,18 @@ body {
 #adventuresContent svg {
     width: 100%;
     height: 100%;
-}/* Ensure final text container covers the nextArrow with proper pointer-events */
+}
+
+/* Ensure final text container covers the nextArrow with proper pointer-events */
 #finalTextContainer {
-    pointer-events: none; /* Let clicks pass through the container ... */
+    pointer-events: none;
+    /* Let clicks pass through the container ... */
     z-index: 9999;
 }
 
 #nextArrow {
-    pointer-events: auto; /* ... but specifically catch them on the arrow */
+    pointer-events: auto;
+    /* ... but specifically catch them on the arrow */
     position: relative;
     z-index: 10000;
 }
@@ -166,7 +179,7 @@ body {
     border-radius: 18px;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,0.45);
+        0 20px 60px rgba(0, 0, 0, 0.45);
 
     opacity: 0;
 
@@ -206,10 +219,10 @@ body {
         clamp(20px, 2vw, 32px);
 
     color:
-        rgba(255,255,255,0.92);
+        rgba(255, 255, 255, 0.92);
 
     text-shadow:
-        0 0 18px rgba(0,0,0,0.55);
+        0 0 18px rgba(0, 0, 0, 0.55);
 
     letter-spacing: 0.04em;
 

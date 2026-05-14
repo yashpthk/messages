@@ -169,7 +169,8 @@ button {
     box-sizing: border-box;
 }
 
-#message, .message {
+#message,
+message {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,32 +179,41 @@ button {
     font-size: 1.8rem;
     line-height: 1.5;
     margin: 24px 0;
-    opacity: 1; /* override original #message opacity 0 */
+    opacity: 1;
+    /* override original #message opacity 0 */
     transition: opacity 0.4s ease;
     white-space: pre-wrap;
 }
+
 #message {
     opacity: 0;
 }
 
-#message.specialMessage, .message.specialMessage {
+#message.specialMessage,
+.message.specialMessage {
     color: #5f3b54;
     font-style: italic;
     font-size: 1.65rem;
     letter-spacing: 0.01em;
 }
 
-#message.celebratoryMessage, .message.celebratoryMessage {
+#message.celebratoryMessage,
+.message.celebratoryMessage {
     color: #d11a2a;
     font-weight: bold;
     font-size: 2rem;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     animation: bounce 1s infinite alternate;
 }
 
 @keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-5px); }
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
 }
 
 .slot-machine-text {
@@ -246,9 +256,9 @@ button {
 }
 
 .lockBtn,
-.nextBtn,
+.rerollBtn,
 .resetBtn,
-.rerollBtn {
+.nextBtn {
     width: 34px;
     height: 34px;
     padding: 0;
@@ -262,14 +272,9 @@ button {
     position: absolute;
 }
 
+.nextBtn,
 .resetBtn {
-  border: 0px;
-  width: 24px;
-  height: 24px;
-}
-
-.nextBtn {
-  border: 0px;
+    border: 0px;
 }
 
 .lockBtn {
@@ -295,8 +300,15 @@ button {
 }
 
 @keyframes slideInOut {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-5px);
+    }
 }
 
 .card.introCard .reroll-hint {
@@ -399,7 +411,8 @@ button {
     border-color: #d4af37;
 }
 
-#message.rareMessage, .message.rareMessage {
+#message.rareMessage,
+.message.rareMessage {
     background: linear-gradient(90deg, #b38728, #fcf6ba, #bf953f, #b38728);
     background-size: 200% auto;
     -webkit-background-clip: text;

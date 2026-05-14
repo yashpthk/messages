@@ -1,6 +1,7 @@
-const PASSWORD_HASH = '8156126c0dd2672e7cf9b979908147fbab77f24f2e333c69fd4b75fcba400691'; // 'endearing'
+const PASSWORD_HASH = '8156126c0dd2672e7cf9b979908147fbab77f24f2e333c69fd4b75fcba400691';
 
 let failedAttempts = 0;
+let isWishMode = false;
 
 async function sha256(text) {
     const data = new TextEncoder().encode(text);
@@ -10,31 +11,73 @@ async function sha256(text) {
 }
 
 async function checkPassword() {
-    try {
-        const entered = document.getElementById('passwordInput').value.trim();
-        const enteredHash = await sha256(entered.toLowerCase());
+    const inputEl = document.getElementById('passwordInput');
+    const hintEl = document.getElementById('hint');
+    const entered = inputEl.value.trim();
 
-        if (enteredHash === PASSWORD_HASH) {
-            triggerEndgameTransition();
+    // 1. If we are in Wish Mode, any entry (that isn't just the prefix) triggers the end
+    if (isWishMode) {
+        // If they didn't type anything beyond "I wish", don't let them proceed
+        if (entered.toLowerCase() === "i wish" || entered === "") {
+            hintEl.textContent = "Don't be shy, tell the stars...";
             return;
         }
+        triggerEndgameTransition(entered);
+        return;
+    }
 
-        failedAttempts += 1;
-        document.getElementById('error').textContent = '';
-        const hintEl = document.getElementById('hint');
+    // 2. Standard Password Logic
+    const enteredHash = await sha256(entered.toLowerCase());
+    if (enteredHash === PASSWORD_HASH) {
+        showAdventures();
+        return;
+    }
 
-        if (failedAttempts === 1) hintEl.textContent = 'Not Quite. You have found all cards...';
-        else if (failedAttempts === 2) hintEl.textContent = 'This one is not easy.';
-        else if (failedAttempts === 3) hintEl.textContent = 'Is not a Cafè.';
-        else if (failedAttempts === 4) hintEl.textContent = 'Nor any place.';
-        else if (failedAttempts === 5) hintEl.textContent = 'Last try or this locks forever.';
-        else if (failedAttempts >= 6) {
-            hintEl.textContent = 'You were bold with choosing to guess. And I was kidding.';
-        }
-    } catch (e) {
-        document.getElementById('error').textContent = 'Error checking password.';
+    // 3. Failed Attempt Progression
+    failedAttempts += 1;
+
+    if (failedAttempts < 8) {
+        const hints = [
+            'Not Quite. The mystery deepens.',
+            'This one is not easy.',
+            'This one is not a Cafè.',
+            'No any place.',
+            'Last try or this locks forever.',
+            'You were bold with choosing to guess. And I was kidding.',
+            'Actually... let’s try something else.'
+        ];
+        hintEl.textContent = hints[failedAttempts - 1] || 'Almost there...';
+    }
+    else {
+        // 4. PIVOT: Activate Wish Mode
+        localStorage.setItem('hasUnlockedWish', 'true'); // Save for next time
+        activateWishMode();
     }
 }
+
+// HELPER: This transforms the UI
+function activateWishMode() {
+    isWishMode = true;
+    failedAttempts = 8;
+    const inputEl = document.getElementById('passwordInput');
+    const hintEl = document.getElementById('hint');
+
+    hintEl.style.color = "#ffccaa";
+    hintEl.textContent = 'The stars are listening now. Make a wish...';
+
+    inputEl.type = 'text';
+    inputEl.value = 'I wish ';
+    inputEl.placeholder = 'I wish...';
+    inputEl.focus(); // Auto-focus so they can start typing immediately
+}
+
+// ON PAGE LOAD: Check if they've been here before
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('hasUnlockedWish') === 'true') {
+        activateWishMode();
+    }
+});
+
 
 document.getElementById('passwordInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -42,7 +85,52 @@ document.getElementById('passwordInput').addEventListener('keydown', (e) => {
     }
 });
 
-function triggerEndgameTransition() {
+function triggerEndgameTransition(wishText) {
+    if (wishText === "adventure") {
+        // Fade out main card
+        const mainCard = document.getElementById('mainCard');
+        mainCard.style.transition = 'opacity 2s ease-in-out';
+        mainCard.style.opacity = '0';
+        return;
+    }
+    else if (wishText === "wishmode") {
+        // Clean up the input: remove "I wish" if they typed it to avoid "Your wish I wish..."
+        let cleanWish = localStorage.getItem('hasUnlockedWish');
+
+        const finalMsg = document.getElementById('finalText');
+        finalMsg.innerHTML = `As chaos drifts away, your wish for <strong>${cleanWish}</strong> will find its place among the stars.`;
+
+        // Fade out text container
+        const finalTextContainer = document.getElementById('finalTextContainer');
+        finalTextContainer.style.transition = 'opacity 1s ease';
+        finalTextContainer.style.opacity = '0';
+
+        // Clear previous elements so they can be re-drawn
+        setTimeout(() => {
+            document.getElementById('starsContainer').innerHTML = '';
+            document.getElementById('lines').innerHTML = '';
+            document.getElementById('stars').innerHTML = '';
+
+            const uranus = document.getElementById('uranus');
+            uranus.style.transition = 'none';
+            uranus.style.opacity = '0';
+            uranus.classList.remove('drift');
+
+            finalTextContainer.style.transition = '';
+        }, 1000);
+    }
+    else {
+
+        // Clean up the input: remove "I wish" if they typed it to avoid "Your wish I wish..."
+        let cleanWish = wishText.replace(/^(i wish for|i wish to|i wish)\s+/i, "");
+
+        // Store in localStorage for the this page
+        localStorage.setItem('hasUnlockedWish', cleanWish);
+
+        const finalMsg = document.getElementById('finalText');
+        finalMsg.innerHTML = `As chaos drifts away, your wish for <strong>${cleanWish}</strong> will find its place among the stars.`;
+    }
+
     // Fade out main card
     const mainCard = document.getElementById('mainCard');
     mainCard.style.transition = 'opacity 2s ease-in-out';
@@ -82,7 +170,7 @@ function animateConstellation() {
     const linesGroup = document.getElementById('lines');
     const starsGroup = document.getElementById('stars');
     const svg = document.getElementById('constellationSvg');
-    
+
     // 1. Get dynamic dimensions
     const svgWidth = svg.clientWidth;
     const svgHeight = svg.clientHeight;
@@ -90,7 +178,7 @@ function animateConstellation() {
     // 2. Establish a scale factor (80% of the smaller dimension)
     // This prevents the "too big" problem on mobile.
     const scale = Math.min(svgWidth, svgHeight) * 0.8;
-    
+
     // 3. Center point
     const cx = svgWidth * 0.5;
     const cy = svgHeight * 0.45; // Slightly above true center to account for the "body"
@@ -106,7 +194,7 @@ function animateConstellation() {
         { x: cx + (scale * 0.18), y: cy + (scale * 0.32), r: 4, color: "#ffffff" }, // 6: Hyades Bot
         { x: cx + (scale * 0.40), y: cy + (scale * 0.42), r: 4, color: "#ffffff" }, // 7: Body Rear
         { x: cx + (scale * 0.43), y: cy + (scale * 0.47), r: 3, color: "#ffffff" }, // 8: Leg Tip
-        { x: cx + (scale * 0.23), y: cy - (scale * 0.15), r: 3, color: "#ccddff" }, // 9: Pleiades 1
+        { x: cx + (scale * 0.23), y: cy - (scale * 0.15), r: 2, color: "#ffffff" }, // 9: Pleiades 1
         { x: cx + (scale * 0.27), y: cy - (scale * 0.12), r: 3, color: "#ccddff" }  // 10: Pleiades 2
     ];
 
@@ -164,11 +252,13 @@ function animateConstellation() {
     }, points.length * 300);
 }
 
-
-
 function showUranus() {
     const uranus = document.getElementById('uranus');
-    
+    // Restore transition so it can fade in and drift
+    uranus.style.transition = '';
+    // Force reflow
+    void uranus.offsetWidth;
+
     // Set initial position near the constellation
     const svgWidth = document.getElementById('constellationSvg').clientWidth;
     const svgHeight = document.getElementById('constellationSvg').clientHeight;
@@ -178,12 +268,14 @@ function showUranus() {
     uranus.setAttribute('cx', startX);
     uranus.setAttribute('cy', startY);
 
+
     // Fade in
     uranus.style.opacity = '1';
 
     // Wait a moment, then drift away
     setTimeout(() => {
         uranus.classList.add('drift');
+        // fade out as it drifts
 
         // After drifting starts, show final text
         setTimeout(() => {
@@ -215,7 +307,7 @@ function showAdventures() {
             />
 
             <div class="adventure-text">
-                example text
+                To more adventures!
             </div>
         </div>
     `;
