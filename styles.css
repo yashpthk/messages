@@ -272,6 +272,12 @@ message {
     position: absolute;
 }
 
+.search-container .resetBtn {
+    position: static !important;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+}
+
 .nextBtn,
 .resetBtn {
     border: 0px;
