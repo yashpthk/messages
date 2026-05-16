@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endgame</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="em-styles.css">
+</head>
+
+<body>
+    <div class="card" id="mainCard">
+        <div id="loginPage" style="display: block;">
+            <div style="font-size:40px;line-height:1;">🔒</div>
+            <div id="hint" class="hint"></div>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <br>
+            <button class="actionBtn" style="display:inline-block;" type="button"
+                onclick="checkPassword()">Open</button>
+            <button id="historyBtn" class="lockBtn" type="button" onclick="window.location.href='history.html';"
+                style="right: 56px;">📜</button>
+            <div class="error" id="error"></div>
+        </div>
+    </div>
+
+    <!-- Sky Scene -->
+    <div id="skyScene" style="display: none;">
+        <div id="starsContainer"></div>
+        <!-- Taurus Constellation SVG -->
+        <svg id="constellationSvg" width="100%" height="100%">
+            <defs>
+                <filter id="glow" x="-500%" y="-500%" width="1000%" height="1000%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur1"></feGaussianBlur>
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2"></feGaussianBlur>
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur3"></feGaussianBlur>
+                    <feMerge>
+                        <feMergeNode in="blur3"></feMergeNode>
+                        <feMergeNode in="blur2"></feMergeNode>
+                        <feMergeNode in="blur1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+            </defs>
+            <g id="lines" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1.5" fill="none">
+                <!-- Lines added by JS -->
+            </g>
+            <g id="stars" fill="#ffffff" filter="url(#glow)">
+                <!-- Stars added by JS -->
+            </g>
+
+            <!-- Uranus and residual glow -->
+            <circle id="uranusResidualGlow" cx="60%" cy="40%" r="5" fill="#4B70DD" opacity="0" filter="url(#glow)">
+            </circle>
+            <circle id="uranus" cx="60%" cy="40%" r="4" fill="#a0d2eb" opacity="0" filter="url(#glow)"></circle>
+        </svg>
+
+        <div id="finalTextContainer">
+            <div id="finalText">I wish all the chaos drifts away from your life...</div>
+            <button id="nextArrow" class="nextBtn" type="button"
+                onclick="triggerEndgameTransition('wishmode')">∞</button>
+        </div>
+    </div>
+
+    <div id="adventuresOverlay" style="display: none;">
+        <div id="adventuresContent">
+            <!-- SVG will be loaded here -->
+        </div>
+    </div>
+
+    <script src="em-script.js"></script>
+</body>
+
+</html>

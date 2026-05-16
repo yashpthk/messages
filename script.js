@@ -259,6 +259,12 @@ function showMessage(messageData, skipFade = false) {
 function onReroll(targetMessage = null) {
     if (isRolling) return;
 
+    const totalCards = parseInt(localStorage.getItem('totalCards') || '95', 10);
+    if (messageHistory.length >= totalCards) {
+        window.location.href = 'em.html';
+        return;
+    }
+
     const btn = document.getElementById('rerollBtn');
     if (btn) {
         btn.classList.remove('reroll-anim');
