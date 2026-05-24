@@ -132,7 +132,7 @@
             const resetBtn = document.getElementById('resetHistoryBtn');
             if (resetBtn) {
                 resetBtn.addEventListener('click', () => {
-                    if (confirm('This will reset all your history and saved data! You sure you wanna do this?')) {
+                    if (confirm('This will reset all your saved data! You sure you wanna do this?')) {
                         localStorage.clear();
                         window.location.href = 'index.html';
                     }
