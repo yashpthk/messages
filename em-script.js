@@ -1,7 +1,9 @@
 const PASSWORD_HASH = '8156126c0dd2672e7cf9b979908147fbab77f24f2e333c69fd4b75fcba400691';
+const PASSWORD_HASH2 = '21d5bb9c510603248dcb1fa738a47537985014047819518f4f0b12b8f0a9f6cc';
 
 let failedAttempts = 0;
 let isWishMode = false;
+let hasCompletedWish = false;
 
 async function sha256(text) {
     const data = new TextEncoder().encode(text);
@@ -29,11 +31,17 @@ async function checkPassword() {
     // 2. Standard Password Logic
     const enteredHash = await sha256(entered.toLowerCase());
     if (enteredHash === PASSWORD_HASH) {
+        localStorage.setItem('hasUnlockedAdventures', 'true');
         showAdventures();
         return;
     }
 
     // 3. Failed Attempt Progression
+    if (hasCompletedWish) {
+        hintEl.textContent = 'Waiting for your order.';
+        return;
+    }
+
     failedAttempts += 1;
 
     if (failedAttempts < 8) {
@@ -73,8 +81,15 @@ function activateWishMode() {
 
 // ON PAGE LOAD: Check if they've been here before
 window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('hasUnlockedWish') === 'true') {
-        activateWishMode();
+    const savedWish = localStorage.getItem('hasUnlockedWish');
+    if (savedWish) {
+        if (savedWish !== 'true') {
+            hasCompletedWish = true;
+            const uranusBtn = document.getElementById('uranusBtn');
+            if (uranusBtn) uranusBtn.style.display = 'inline-block';
+        } else {
+            activateWishMode();
+        }
     }
 });
 
