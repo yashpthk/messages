@@ -27,10 +27,18 @@
 <body>
     <div class="history-page-wrapper">
         <div class="search-container" style="align-items: center;">
-            <input type="text" id="searchInput" placeholder="Search found history...">
+            <button id="toggleHintBtn" class="resetBtn" type="button">?</button>
+            <input type="text" id="searchInput" style="font-size: small;" placeholder="Search found history...">
             <span id="historyStats"
                 style="margin-left: auto; color: #8a7280; font-size: 0.9rem; white-space: nowrap; display: flex; flex-direction: column; text-align: right; line-height: 1.4;"></span>
             <button id="resetHistoryBtn" class="resetBtn" type="button">&#8634;</button>
+        </div>
+        <div class="hint-container" id="hintContainer"
+            style="text-align: center; margin: 16px 0; color: #b09ba7; font-style: italic; font-size: 0.95rem; padding: 0 16px; display: none; flex-direction: column; align-items: center; gap: 8px;">
+            <span id="rareHintText">Want to know how to unlock all rare cards?</span>
+            <button id="nextHintBtn" type="button"
+                style="padding: 6px 12px; background: transparent; border: 1px solid rgba(176, 155, 167, 0.5); color: #b09ba7; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s, border-color 0.2s;">Show
+                Hint</button>
         </div>
         <div class="history-container" id="historyGrid">
             <!-- Cards will be dynamically inserted here -->
@@ -130,6 +138,34 @@
                     }
                 });
             }
+
+            const hints = [
+                "Rare cards rely on your impatience.",
+                "Notice how many cards you've seen?",
+                "Rare cards are tied to the exact number of cards you've drawn in total.",
+                "The more you draw, the closer you get to the rarest messages.",
+                "If a rare card has an ID of 10, it will only show up as your 10th draw!",
+                "Every reroll counts.",
+                "Don't stop now, some secrets only reveal themselves when the timing is exactly right.",
+                "Looking at history will decrease your chance of finding different rare cards."
+            ];
+            let currentHintIndex = -1;
+            const hintBtn = document.getElementById('nextHintBtn');
+            hintBtn.addEventListener('click', () => {
+                currentHintIndex = (currentHintIndex + 1) % hints.length;
+                document.getElementById('rareHintText').textContent = `💡 Hint: ${hints[currentHintIndex]}`;
+                hintBtn.textContent = 'Next Hint';
+            });
+
+            const toggleHintBtn = document.getElementById('toggleHintBtn');
+            const hintContainer = document.getElementById('hintContainer');
+            toggleHintBtn.addEventListener('click', () => {
+                if (hintContainer.style.display === 'none') {
+                    hintContainer.style.display = 'flex';
+                } else {
+                    hintContainer.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>

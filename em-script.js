@@ -38,10 +38,10 @@ async function checkPassword() {
 
     if (failedAttempts < 8) {
         const hints = [
-            'Not Quite. The mystery deepens.',
-            'This one is not easy.',
-            'This one is not a Cafè.',
-            'No any place.',
+            'You have found all the cards... but this one is hidden.',
+            'And not easy.',
+            'Not a cafe.',
+            'Waiting for your order.',
             'Last try or this locks forever.',
             'You were bold with choosing to guess. And I was kidding.',
             'Actually... let’s try something else.'
