@@ -204,6 +204,17 @@ function showMessage(messageData, skipFade = false) {
         }
     }
 
+    const starBtn = document.getElementById('starBtn');
+    if (starBtn) {
+        const savedWish = localStorage.getItem('hasUnlockedWish');
+        const hasAdventures = localStorage.getItem('hasUnlockedAdventures') === 'true';
+        if (savedWish && savedWish !== 'true' && hasAdventures && !isSpecialFirstMessage) {
+            starBtn.style.display = 'block';
+        } else {
+            starBtn.style.display = 'none';
+        }
+    }
+
     window.setTimeout(() => {
         el.textContent = text;
 
@@ -258,6 +269,16 @@ function showMessage(messageData, skipFade = false) {
 
 function onReroll(targetMessage = null) {
     if (isRolling) return;
+
+    const totalCards = parseInt(localStorage.getItem('totalCards') || '95', 10);
+    const savedWish = localStorage.getItem('hasUnlockedWish');
+    const hasAdventures = localStorage.getItem('hasUnlockedAdventures') === 'true';
+    const isWishUnlocked = savedWish && savedWish !== 'true';
+
+    if (messageHistory.length >= totalCards && !(isWishUnlocked && hasAdventures)) {
+        window.location.href = 'em.html';
+        return;
+    }
 
     const btn = document.getElementById('rerollBtn');
     if (btn) {

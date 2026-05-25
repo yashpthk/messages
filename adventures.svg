@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+    <defs>
+        <filter id="textGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0a0a0a" />
+            <stop offset="100%" stop-color="#1a1a24" />
+        </linearGradient>
+    </defs>
+
+    <rect width="100%" height="100%" fill="url(#bgGrad)" rx="10" />
+
+    <text x="50%" y="50%"
+          font-family="Georgia, serif"
+          font-size="32"
+          fill="#e0e0e0"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-style="italic"
+          letter-spacing="2"
+          filter="url(#textGlow)">
+        Lets hope for more adventures
+    </text>
+
+    <path d="M 300 250 Q 400 270 500 250" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+</svg>
